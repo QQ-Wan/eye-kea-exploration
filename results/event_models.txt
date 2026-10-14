@@ -81,3 +81,15 @@ Supplement: trial-level search model (734 trials, 83 participants): backtracking
  child -0.5597673 0.1833300 Inf -0.9190875 -0.2004471  -3.053  0.0023
 
 Confidence level used: 0.95 
+
+Supplement: stopping measure rebuilt from teleport times; max |difference| from the main measure = 2.9e-14
+longest pause (s): 3-way group x MS x encounter b=0.229, t(2490)=1.81, p=0.0704; MS vs control (estimate = control - MS):
+ group encF estimate   df t.ratio  p.value
+ adult    1   -0.434 2467  -3.935 8.55e-05
+ child    1   -0.334 2467  -2.754 5.93e-03
+ adult    2   -0.309 2462  -1.954 5.08e-02
+ child    2   -0.517 2464  -3.095 1.99e-03
+ adult    3    0.414 2479   1.762 7.83e-02
+ child    3   -0.511 2454  -2.246 2.48e-02
+ adult    4   -0.319 2469  -0.966 3.34e-01
+ child    4   -0.171 2469  -0.558 5.77e-01

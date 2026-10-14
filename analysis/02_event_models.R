@@ -4,6 +4,7 @@
 #       Degrees of freedom: Kenward-Roger; post-hoc contrasts Tukey-adjusted within each family.
 #  4.   Supplement: the main model for other encounter ranges.
 #  5.   Supplement: trial-level search model (logistic, crossed random effects).
+#  6.   Supplement: stopping measured as the longest pause in each window.
 # Run from the repository root or from analysis/. Outputs: results/event_models.{txt,json}
 suppressMessages({library(lmerTest); library(emmeans); library(jsonlite)})
 root <- if (dir.exists("data")) "." else ".."
@@ -91,4 +92,34 @@ out$search_glmm <- list(n_trials = nrow(Tr), n_participants = length(unique(Tr$c
 cat(sprintf("\nSupplement: trial-level search model (%d trials, %d participants): backtracking x group b=%.3f, z=%.2f, p=%.3f\n",
             nrow(Tr), length(unique(Tr$code)), gs["BTz:groupchild", "Estimate"], gs["BTz:groupchild", "z value"], gs["BTz:groupchild", "Pr(>|z|)"]))
 print(sl, digits = 3, row.names = FALSE)
+
+# 6. supplement: stopping measured as the longest pause in each 5-s window, rebuilt from the teleport times.
+#    The main measure is the mean interval between teleports (one teleport: the longer time to a window
+#    edge; none: 5 s), which cannot tell even from uneven pauses. The main model is repeated with the
+#    longest teleport-free interval in the window (window edges included).
+TP <- read.csv(file.path(root, "data/teleports.csv")); tpl <- split(TP$time, paste(TP$code, TP$block))
+eps <- 1e-6                                    # event and teleport times are logged to the millisecond
+measures <- function(tt, a, b) {               # teleports in [a, b)
+  x <- sort(tt[tt > a - eps & tt < b - eps])
+  m <- if (length(x) > 1) mean(diff(x)) else if (length(x) == 1) max(x - a, b - x) else b - a
+  c(mean_interval = m, longest = max(diff(c(a, x, b))), n = length(x))
+}
+A <- t(mapply(function(code, block, ws) {
+  tt <- tpl[[paste(code, block)]]; e <- ws + 5
+  measures(tt, e, e + 5) - measures(tt, e - 5, e)
+}, E$code, E$block, E$window_start))
+E$alt_mean <- A[, "mean_interval"]; E$alt_longest <- A[, "longest"]
+cat(sprintf("\nSupplement: stopping measure rebuilt from teleport times; max |difference| from the main measure = %.1e\n", max(abs(E$alt_mean - E$stop_diff))))
+E4 <- E[E$encounter <= MAX_ENC, ]; E4$encF <- factor(E4$encounter); alt <- list()
+for (v in c("alt_longest")) {
+  m1v <- lmer(as.formula(paste(v, "~ group * MSevent * encounter + (1 | code)")), data = E4)
+  m3v <- lmer(as.formula(paste(v, "~ group * MSevent * encF + (1 | code)")), data = E4)
+  s <- co(m1v, "groupchild:MSeventTRUE:encounter")
+  mcv <- as.data.frame(summary(pairs(emmeans(m3v, ~ MSevent | group * encF)), infer = TRUE))
+  alt[[v]] <- list(threeway = s, ms_vs_control = mcv)
+  cat(sprintf("%s: 3-way group x MS x encounter b=%.3f, t(%.0f)=%.2f, p=%.4f; MS vs control (estimate = control - MS):\n",
+              "longest pause (s)", s$b, s$df, s$t, s$p))
+  print(mcv[, c("group", "encF", "estimate", "df", "t.ratio", "p.value")], digits = 3, row.names = FALSE)
+}
+out$stopping_measures <- alt
 sink(); write_json(out, file.path(root, "results/event_models.json"), auto_unbox = TRUE, digits = 8)

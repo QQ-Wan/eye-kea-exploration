@@ -30,7 +30,7 @@ Tested with Python 3.8.10 (pandas 2.0.3, numpy 1.24.4, scipy 1.10.1, statsmodels
 | Script | Analyses | Output |
 |---|---|---|
 | `01_participant_stats.py` | Group differences; age effects; outcomes regressed on backtracking and adaptation; backtracking–adaptation correlation; model comparison; age effects within adults; VR and video-game experience | `participant_stats.*`, `model_comparison_*.csv` |
-| `02_event_models.R` | Mixed models of adaptation to multisensory events. Supplement: other encounter ranges; trial-level search model | `event_models.*`, `encounter_ranges_event_model.csv` |
+| `02_event_models.R` | Mixed models of adaptation to multisensory events. Supplement: other encounter ranges; trial-level search model; longest-pause measure of stopping | `event_models.*`, `encounter_ranges_event_model.csv` |
 | `03_object_measures.py` | Supplement: alternative object measures; robustness to the number of encounters | `object_measures.*`, `encounter_ranges_participant.csv` |
 | `04_encounters_backtracking.py` | Supplement: repeated encounters and backtracking | `encounters_backtracking.txt` |
 | `05_hesitation.py` | Pauses and teleport steps on the outbound vs return legs of backtracking episodes | `hesitation.txt` |
