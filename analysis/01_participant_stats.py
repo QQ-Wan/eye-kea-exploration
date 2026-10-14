@@ -1,0 +1,109 @@
+"""Participant-level statistics: group differences, age effects, regressions of exploration and
+search outcomes on backtracking and adaptation, model comparison, and the reviewer-requested
+additions (age effects within adults, VR and video-game experience).
+
+Main object measure: Option 1, the share of catalogue objects in the grid cells a participant
+entered that they looked at. The count of all objects looked at is reported descriptively; analyses
+of the other object measures are in 03_object_measures.py.
+Outputs: results/participant_stats.{txt,json}, results/model_comparison_*.csv
+"""
+import sys
+sys.dont_write_bytecode = True
+import numpy as np, pandas as pd, scipy.stats as st, statsmodels.formula.api as smf
+from statsmodels.stats.power import TTestIndPower
+from common import *
+
+D, E = load()
+A, C = D[D.group == "adult"], D[D.group == "child"]
+log = Log()
+
+# ------------------------------------------------------------------ participants
+log("=== PARTICIPANTS ===")
+log.put("n_adults", len(A)); log.put("n_children", len(C))
+log(f"adults n={len(A)}, children n={len(C)}; children by year of age: {C.age.astype(int).value_counts().sort_index().to_dict()}")
+log(f"adults: age M={A.age.mean():.2f}, SD={A.age.std():.2f}, range {A.age.min():.0f}-{A.age.max():.0f}")
+pw = TTestIndPower().solve_power(nobs1=len(C), ratio=len(A) / len(C), alpha=.05, power=.8)
+z = (st.norm.ppf(.975) + st.norm.ppf(.8)) / np.sqrt(len(D) - 3 - 2)
+log.put("sensitivity", dict(d=pw, partial_r=float(np.tanh(z))))
+log(f"sensitivity (80% power, alpha .05): two-group t-test d={pw:.2f}; partial correlation with 2 covariates r={np.tanh(z):.2f}")
+
+# ------------------------------------------------------------------ exploration
+log("\n=== EXPLORATION ===")
+for v in ["spatial_coverage", "object_count", "opt1", "distance_traveled"]:
+    r = ttest(D, v); log.put(f"t_{v}", r)
+    log(f"{v}: adults {r['adult_M']:.3f} ({r['adult_SD']:.3f}) vs children {r['child_M']:.3f} ({r['child_SD']:.3f}); t({r['df']:.0f})={r['t']:.2f}, p={r['p']:.4f}, Mdiff={r['Mdiff']:.3f} [{r['CI'][0]:.3f}, {r['CI'][1]:.3f}], d={r['d']:.2f}")
+for v in ["spatial_coverage", "object_count", "opt1"]:
+    r = reg(C, f"{v} ~ age", "age"); log.put(f"age_{v}", r); log(f"  children: {v} ~ age: {fmt(r)}")
+for v in ["BT", "BT_distance"]:
+    r = ttest(D, v, welch=True); log.put(f"t_{v}", r)
+    log(f"{v} (Welch): adults {r['adult_M']:.2f} ({r['adult_SD']:.2f}) vs children {r['child_M']:.2f} ({r['child_SD']:.2f}); t({r['df']:.1f})={r['t']:.2f}, p={r['p']:.4f}, Mdiff={r['Mdiff']:.2f} [{r['CI'][0]:.2f}, {r['CI'][1]:.2f}], d={r['d']:.2f}")
+    r = reg(C, f"{v} ~ age", "age"); log.put(f"age_{v}", r); log(f"  children: {v} ~ age: {fmt(r)}")
+r = ttest(D, "step_median", welch=True); log.put("t_step_median", r)
+log(f"teleport step (participant median, m): adults {r['adult_M']:.2f} ({r['adult_SD']:.2f}) vs children {r['child_M']:.2f} ({r['child_SD']:.2f}); t({r['df']:.1f})={r['t']:.2f}, p={r['p']:.3f}, d={r['d']:.2f}")
+r = ttest(D, "n_teleports", welch=True); log.put("t_n_teleports", r)
+log(f"number of teleports: adults {r['adult_M']:.1f} vs children {r['child_M']:.1f}; t({r['df']:.1f})={r['t']:.2f}, p={r['p']:.3f}")
+
+# ------------------------------------------------------------------ search
+log("\n=== SEARCH ===")
+r = ttest(D, "success_proportion"); log.put("t_success", r)
+log(f"success: adults {r['adult_M']:.3f} ({r['adult_SD']:.3f}) vs children {r['child_M']:.3f} ({r['child_SD']:.3f}); t({r['df']:.0f})={r['t']:.2f}, p={r['p']:.4f}, Mdiff={r['Mdiff']:.3f} [{r['CI'][0]:.3f}, {r['CI'][1]:.3f}], d={r['d']:.2f}")
+r = reg(C, "success_proportion ~ age", "age"); log.put("age_success", r); log(f"  children: success ~ age: {fmt(r)}")
+r = ttest(D, "average_success_rt"); log.put("t_rt", r)
+log(f"search time: adults {r['adult_M']:.2f} ({r['adult_SD']:.2f}) vs children {r['child_M']:.2f} ({r['child_SD']:.2f}); t({r['df']:.0f})={r['t']:.2f}, p={r['p']:.4f}, Mdiff={r['Mdiff']:.2f} [{r['CI'][0]:.2f}, {r['CI'][1]:.2f}], d={r['d']:.2f}")
+
+# ------------------------------------------------------------------ one predictor at a time
+log("\n=== MODELS WITH ONE PREDICTOR (outlier rule applied per model; [all data] = no exclusions) ===")
+for y in ["spatial_coverage", "opt1", "success_proportion"]:
+    for x in ["BT", "adaptation"]:
+        m, m_all, ex = fit_rule(D, f"{y} ~ {x}*group", [y, x])
+        res = dict(excluded=ex, children=lin(m, [x, f"{x}:group{CH}"]), adults=lin(m, [x]), interaction=lin(m, [f"{x}:group{CH}"]),
+                   children_all_data=lin(m_all, [x, f"{x}:group{CH}"]), adults_all_data=lin(m_all, [x]), interaction_all_data=lin(m_all, [f"{x}:group{CH}"]))
+        log.put(f"single_{y}_{x}", res)
+        log(f"{y} ~ {x} x group  (excluded: {ex or 'none'})\n   children    {fmt(res['children'])}\n   adults      {fmt(res['adults'])}\n   interaction {fmt(res['interaction'])}"
+            f"\n   [all data] children p={res['children_all_data']['p']:.4f}, adults p={res['adults_all_data']['p']:.4f}, interaction p={res['interaction_all_data']['p']:.4f}")
+
+# ------------------------------------------------------------------ backtracking and adaptation
+log("\n=== BACKTRACKING AND ADAPTATION (partial correlation, controlling for age and number of MS events) ===")
+x = D.dropna(subset=["BT", "adaptation", "age", "n_ms_events"])
+for g, xg in [("adults", x[x.group == "adult"]), ("children", x[x.group == "child"]), ("all participants (supplement)", x)]:
+    r = partial_r(xg); log.put(f"partial_r_{g.split()[0]}", r)
+    log(f"{g}: r({r['df']}) = {r['r']:.3f}, 95% CI [{r['CI'][0]:.3f}, {r['CI'][1]:.3f}], p = {r['p']:.3f}")
+
+# ------------------------------------------------------------------ model comparison (Tables S1-S3)
+log("\n=== MODEL COMPARISON (participants with all predictors; centered predictors; majority of AIC, BIC, adjusted R2) ===")
+def compare(y, label):
+    T, picks, chosen = select_model(D, y); X = D.dropna(subset=[y, "BT", "adaptation"])
+    T.round(4).to_csv(RESULTS / f"model_comparison_{label}.csv", index=False)
+    m, m_all, ex = fit_rule(D, f"{y} ~ {rhs(MODELS[chosen - 2])}", [y, "BT", "adaptation"])
+    coefs = {k: dict(b=m.params[k], t=m.tvalues[k], p=m.pvalues[k], p_all_data=m_all.pvalues[k]) for k in m.params.index if k != "Intercept"}
+    slopes = {}
+    for pred, nm in [("BT_c", "backtracking"), ("adaptation_c", "adaptation")]:
+        if pred in m.params:
+            inter = f"{pred}:group{CH}"
+            if inter in m.params:
+                slopes[f"children_{nm}"] = lin(m, [pred, inter]); slopes[f"adults_{nm}"] = lin(m, [pred])
+            else:
+                slopes[f"all_{nm}"] = lin(m, [pred])
+    log.put(f"model_{label}", dict(n=len(X), picks=picks, chosen=chosen, formula=rhs(MODELS[chosen - 2]), excluded=ex, adjR2=m.rsquared_adj,
+                                   F=m.fvalue, F_df=[m.df_model, m.df_resid], F_p=m.f_pvalue, coefs=coefs, slopes=slopes))
+    log(f"{label} (n={len(X)}): best by AIC={picks['AIC']}, BIC={picks['BIC']}, adjR2={picks['adjR2']} -> model {chosen}: {rhs(MODELS[chosen - 2])}")
+    log(f"   excluded: {ex or 'none'}; adj R2={m.rsquared_adj:.3f}, F({m.df_model:.0f},{m.df_resid:.0f})={m.fvalue:.2f}, p={m.f_pvalue:.4f}")
+    for k, v in coefs.items():
+        log(f"      {k:40s} b={v['b']:+.4f}, t={v['t']:+.2f}, p={v['p']:.4f}  [all data p={v['p_all_data']:.4f}]")
+    for k, v in slopes.items():
+        log(f"      simple slope {k:24s} {fmt(v)}")
+for y, label in [("spatial_coverage", "spatial_coverage"), ("opt1", "object_option1"), ("success_proportion", "search_success")]:
+    compare(y, label)
+
+# ------------------------------------------------------------------ reviewer-requested additions
+log("\n=== AGE EFFECTS WITHIN ADULTS ===")
+for v in ["spatial_coverage", "object_count", "opt1", "BT", "success_proportion", "average_success_rt", "adaptation"]:
+    r = reg(A, f"{v} ~ age", "age"); log.put(f"adult_age_{v}", r); log(f"  adults: {v} ~ age: t({r['df']:.0f})={r['t']:+.2f}, p={r['p']:.3f}")
+log("\n=== VR AND VIDEO-GAME EXPERIENCE (1-7, 7 = strongly agree) ===")
+for v, label in [("vr_experience", "VR experience"), ("game_experience", "video-game experience")]:
+    a, c = A[v].dropna(), C[v].dropna(); t, p = st.ttest_ind(a, c, equal_var=False)
+    log.put(f"q_{v}", dict(adult_M=a.mean(), adult_SD=a.std(), n_adult=len(a), child_M=c.mean(), child_SD=c.std(), n_child=len(c), t=t, p=p,
+                           adult_agree=int((a >= 5).sum()), child_agree=int((c >= 5).sum())))
+    log(f"  {label}: adults {a.mean():.2f} ({a.std():.2f}, n={len(a)}) vs children {c.mean():.2f} ({c.std():.2f}, n={len(c)}); Welch t={t:.2f}, p={p:.3f}; agree (5-7): adults {int((a>=5).sum())}, children {int((c>=5).sum())}")
+
+log.save("participant_stats")

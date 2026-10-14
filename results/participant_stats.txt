@@ -1,0 +1,103 @@
+=== PARTICIPANTS ===
+adults n=42, children n=41; children by year of age: {7: 3, 8: 4, 9: 6, 10: 8, 11: 6, 12: 4, 13: 7, 14: 3}
+adults: age M=19.83, SD=1.58, range 18-23
+sensitivity (80% power, alpha .05): two-group t-test d=0.62; partial correlation with 2 covariates r=0.31
+
+=== EXPLORATION ===
+spatial_coverage: adults 0.631 (0.084) vs children 0.545 (0.167); t(81)=2.98, p=0.0038, Mdiff=0.086 [0.029, 0.143], d=0.66
+object_count: adults 151.690 (28.790) vs children 112.976 (31.047); t(81)=5.89, p=0.0000, Mdiff=38.715 [25.643, 51.787], d=1.29
+opt1: adults 0.282 (0.052) vs children 0.274 (0.066); t(81)=0.59, p=0.5551, Mdiff=0.008 [-0.018, 0.034], d=0.13
+distance_traveled: adults 403.572 (128.534) vs children 383.180 (168.378); t(81)=0.62, p=0.5363, Mdiff=20.392 [-44.932, 85.716], d=0.14
+  children: spatial_coverage ~ age: b=+0.0263 [+0.0013, +0.0512], t(39)=+2.13, p=0.0397
+  children: object_count ~ age: b=+5.8683 [+1.3438, +10.3927], t(39)=+2.62, p=0.0124
+  children: opt1 ~ age: b=-0.0033 [-0.0137, +0.0072], t(39)=-0.63, p=0.5297
+BT (Welch): adults 59.91 (41.20) vs children 89.53 (43.32); t(80.6)=-3.19, p=0.0020, Mdiff=-29.62 [-48.09, -11.14], d=-0.70
+  children: BT ~ age: b=-9.3229 [-15.4681, -3.1776], t(39)=-3.07, p=0.0039
+BT_distance (Welch): adults 109.23 (78.56) vs children 132.03 (71.38); t(80.6)=-1.38, p=0.1699, Mdiff=-22.80 [-55.57, 9.96], d=-0.30
+  children: BT_distance ~ age: b=-2.9309 [-14.1728, +8.3111], t(39)=-0.53, p=0.6009
+teleport step (participant median, m): adults 3.06 (0.35) vs children 3.03 (0.32); t(80.6)=0.35, p=0.725, d=0.08
+number of teleports: adults 312.8 vs children 314.2; t(76.2)=-0.05, p=0.958
+
+=== SEARCH ===
+success: adults 0.848 (0.136) vs children 0.740 (0.203); t(81)=2.84, p=0.0057, Mdiff=0.108 [0.032, 0.183], d=0.62
+  children: success ~ age: b=+0.0629 [+0.0380, +0.0877], t(39)=+5.11, p=0.0000
+search time: adults 33.00 (11.63) vs children 37.83 (17.56); t(81)=-1.48, p=0.1430, Mdiff=-4.82 [-11.31, 1.67], d=-0.32
+
+=== MODELS WITH ONE PREDICTOR (outlier rule applied per model; [all data] = no exclusions) ===
+spatial_coverage ~ BT x group  (excluded: ['C17', 'C31'])
+   children    b=-0.0019 [-0.0027, -0.0010], t(77)=-4.51, p=0.0000
+   adults      b=-0.0000 [-0.0008, +0.0008], t(77)=-0.08, p=0.9328
+   interaction b=-0.0018 [-0.0030, -0.0007], t(77)=-3.19, p=0.0021
+   [all data] children p=0.0018, adults p=0.9430, interaction p=0.0317
+spatial_coverage ~ adaptation x group  (excluded: ['C05', 'C17'])
+   children    b=+0.0587 [-0.0044, +0.1219], t(77)=+1.85, p=0.0679
+   adults      b=+0.0278 [-0.0331, +0.0888], t(77)=+0.91, p=0.3657
+   interaction b=+0.0309 [-0.0569, +0.1186], t(77)=+0.70, p=0.4858
+   [all data] children p=0.1037, adults p=0.4208, interaction p=0.5378
+opt1 ~ BT x group  (excluded: ['A32', 'C25'])
+   children    b=+0.0000 [-0.0004, +0.0004], t(77)=+0.16, p=0.8718
+   adults      b=-0.0000 [-0.0004, +0.0004], t(77)=-0.14, p=0.8862
+   interaction b=+0.0001 [-0.0005, +0.0006], t(77)=+0.22, p=0.8298
+   [all data] children p=0.4275, adults p=0.4564, interaction p=0.2780
+opt1 ~ adaptation x group  (excluded: ['A32', 'C05', 'C25'])
+   children    b=-0.0347 [-0.0615, -0.0079], t(76)=-2.58, p=0.0118
+   adults      b=+0.0140 [-0.0148, +0.0428], t(76)=+0.97, p=0.3364
+   interaction b=-0.0487 [-0.0880, -0.0094], t(76)=-2.47, p=0.0159
+   [all data] children p=0.0395, adults p=0.6332, interaction p=0.2454
+success_proportion ~ BT x group  (excluded: ['C02'])
+   children    b=-0.0021 [-0.0032, -0.0009], t(78)=-3.64, p=0.0005
+   adults      b=-0.0003 [-0.0015, +0.0009], t(78)=-0.52, p=0.6056
+   interaction b=-0.0018 [-0.0034, -0.0001], t(78)=-2.16, p=0.0342
+   [all data] children p=0.0012, adults p=0.6205, interaction p=0.0522
+success_proportion ~ adaptation x group  (excluded: ['C22'])
+   children    b=+0.1158 [+0.0271, +0.2045], t(78)=+2.60, p=0.0112
+   adults      b=+0.0026 [-0.0828, +0.0881], t(78)=+0.06, p=0.9512
+   interaction b=+0.1132 [-0.0100, +0.2363], t(78)=+1.83, p=0.0711
+   [all data] children p=0.0305, adults p=0.9532, interaction p=0.1273
+
+=== BACKTRACKING AND ADAPTATION (partial correlation, controlling for age and number of MS events) ===
+adults: r(38) = 0.278, 95% CI [-0.036, 0.543], p = 0.074
+children: r(37) = 0.296, 95% CI [-0.022, 0.559], p = 0.060
+all participants (supplement): r(79) = 0.244, 95% CI [0.027, 0.439], p = 0.026
+
+=== MODEL COMPARISON (participants with all predictors; centered predictors; majority of AIC, BIC, adjusted R2) ===
+spatial_coverage (n=83): best by AIC=18, BIC=13, adjR2=18 -> model 18: BT_c + adaptation_c + group + BT_c:adaptation_c + BT_c:group + adaptation_c:group
+   excluded: ['C17', 'C31']; adj R2=0.231, F(6,74)=5.00, p=0.0002
+      group[T.child]                           b=-0.0431, t=-1.64, p=0.1045  [all data p=0.0117]
+      BT_c                                     b=-0.0002, t=-0.38, p=0.7045  [all data p=0.6117]
+      BT_c:group[T.child]                      b=-0.0017, t=-2.67, p=0.0094  [all data p=0.0510]
+      adaptation_c                             b=+0.0249, t=+0.72, p=0.4710  [all data p=0.8983]
+      adaptation_c:group[T.child]              b=+0.0082, t=+0.15, p=0.8813  [all data p=0.0550]
+      BT_c:adaptation_c                        b=-0.0002, t=-0.30, p=0.7614  [all data p=0.0300]
+      simple slope children_backtracking    b=-0.0019 [-0.0028, -0.0009], t(74)=-4.06, p=0.0001
+      simple slope adults_backtracking      b=-0.0002 [-0.0010, +0.0007], t(74)=-0.38, p=0.7045
+      simple slope children_adaptation      b=+0.0331 [-0.0373, +0.1034], t(74)=+0.94, p=0.3519
+      simple slope adults_adaptation        b=+0.0249 [-0.0436, +0.0933], t(74)=+0.72, p=0.4710
+object_option1 (n=83): best by AIC=3, BIC=3, adjR2=19 -> model 3: adaptation_c
+   excluded: ['C05', 'C25']; adj R2=0.050, F(1,79)=5.20, p=0.0253
+      adaptation_c                             b=-0.0224, t=-2.28, p=0.0253  [all data p=0.0623]
+      simple slope all_adaptation           b=-0.0224 [-0.0420, -0.0028], t(79)=-2.28, p=0.0253
+search_success (n=83): best by AIC=17, BIC=8, adjR2=17 -> model 17: BT_c + adaptation_c + group + BT_c:group + adaptation_c:group
+   excluded: none; adj R2=0.249, F(5,77)=6.44, p=0.0000
+      group[T.child]                           b=-0.0839, t=-2.30, p=0.0242  [all data p=0.0242]
+      BT_c                                     b=-0.0003, t=-0.56, p=0.5802  [all data p=0.5802]
+      BT_c:group[T.child]                      b=-0.0020, t=-2.37, p=0.0203  [all data p=0.0203]
+      adaptation_c                             b=+0.0087, t=+0.20, p=0.8390  [all data p=0.8390]
+      adaptation_c:group[T.child]              b=+0.1253, t=+2.07, p=0.0420  [all data p=0.0420]
+      simple slope children_backtracking    b=-0.0023 [-0.0035, -0.0012], t(77)=-4.03, p=0.0001
+      simple slope adults_backtracking      b=-0.0003 [-0.0016, +0.0009], t(77)=-0.56, p=0.5802
+      simple slope children_adaptation      b=+0.1340 [+0.0480, +0.2199], t(77)=+3.10, p=0.0027
+      simple slope adults_adaptation        b=+0.0087 [-0.0760, +0.0933], t(77)=+0.20, p=0.8390
+
+=== AGE EFFECTS WITHIN ADULTS ===
+  adults: spatial_coverage ~ age: t(40)=+0.03, p=0.977
+  adults: object_count ~ age: t(40)=+0.04, p=0.968
+  adults: opt1 ~ age: t(40)=+0.39, p=0.700
+  adults: BT ~ age: t(40)=-1.59, p=0.120
+  adults: success_proportion ~ age: t(40)=+0.70, p=0.490
+  adults: average_success_rt ~ age: t(40)=+1.94, p=0.059
+  adults: adaptation ~ age: t(40)=+0.48, p=0.636
+
+=== VR AND VIDEO-GAME EXPERIENCE (1-7, 7 = strongly agree) ===
+  VR experience: adults 2.55 (1.60, n=42) vs children 4.17 (2.40, n=41); Welch t=-3.62, p=0.001; agree (5-7): adults 7, children 18
+  video-game experience: adults 5.12 (2.07, n=42) vs children 5.78 (1.88, n=41); Welch t=-1.52, p=0.131; agree (5-7): adults 27, children 33

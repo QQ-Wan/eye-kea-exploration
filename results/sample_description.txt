@@ -1,0 +1,6 @@
+adults n = 42; children n = 41
+children by year of age: {7: 3, 8: 4, 9: 6, 10: 8, 11: 6, 12: 4, 13: 7, 14: 3}
+children, decimal age (n = 38 with birthdates): M = 11.10, SD = 2.11, range 7.11-14.96
+children, gender: {'M': 23, 'F': 17, 'Nonbinary': 1}
+adults, age: M = 19.83, SD = 1.58, range 18-23
+adults, gender (n = 42 forms matched): {'Female': 24, 'Male': 16, 'Nonbinary': 2}

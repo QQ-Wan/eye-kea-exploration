@@ -1,0 +1,5 @@
+{
+  "raw_root": "/path/to/eye-kea",
+  "private_dir": "/path/outside/the/repository/eye-kea-private",
+  "staging_dir": "/path/outside/cloud/sync/eye-kea-staging"
+}

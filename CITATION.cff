@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use these data or code, please cite the article."
+title: "eye-kea-exploration: data and analysis code"
+authors:
+  - family-names: Wan
+    given-names: Qianqian
+    email: qq.wan.info@gmail.com
+    affiliation: "Center for Mind and Brain, University of California, Davis"
+  - family-names: Moriarty
+    given-names: Nathalie
+    affiliation: "University of California, Davis"
+  - family-names: Duarte
+    given-names: Shea E.
+    affiliation: "University of California, Davis"
+  - family-names: Ghetti
+    given-names: Simona
+    affiliation: "University of California, Davis"
+  - family-names: Geng
+    given-names: Joy J.
+    affiliation: "University of California, Davis"
+license: MIT
+repository-code: "https://github.com/QQ-Wan/eye-kea-exploration"

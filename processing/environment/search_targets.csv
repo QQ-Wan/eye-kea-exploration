@@ -1,0 +1,11 @@
+﻿Target,target_object,,target_description,collectable,shortest_path,x,y,z
+target1,CouchSofa_004,couchO,couch_sofa_orange_pat,"[7,18]",,10.7,-0.02,26.3
+target2,LampH_014,lampO,lamp_tall_satellite_orange,"[27,12]",,40.3,1.37,19.03
+target3,DeskC011,deskO,desk_simple_orange,"[14,28]",,21.38,0,42.16
+target4,shelfI001,shelfG,shelf_tall_book_green,"[25, 22]",,36.9,0,32.8
+target5,Bed_004,bedY,bed_queen_yellow_pat,"[-4,13]",,-6.25,0,19.74
+target6,CouchLoveseat_001,couchP,couch_loveseat_white_purple,"[11,10]",,15.87,0,14.79
+target7,LampB_007,lampY,lamp_small_round_yellow_pat,"[21,11]",,31.77,1.37,15.99
+target8,DeskA008,deskP,desk_box_pink_pat,"[20, 36]",,30.72,0.75,54.63
+target9,shelf_box_3x3_012,shelfGp,shelf_short_box_green_pat,"[21, 15]",,30.63,0.92,21.2
+target10,Bed_003,bedP,bed_queen_purple_pat,"[6,10]",,9.61,0,15.36

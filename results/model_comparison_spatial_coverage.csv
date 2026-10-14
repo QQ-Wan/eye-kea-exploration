@@ -1,0 +1,19 @@
+model,k,AIC,BIC,adjR2,formula
+2,2,-100.2731,-95.4354,0.0978,BT_c
+3,2,-91.8565,-87.0188,0.0015,adaptation_c
+4,2,-99.37,-94.5323,0.0879,group
+5,3,-102.6076,-95.3511,0.133,BT_c + adaptation_c
+6,3,-102.7748,-95.5183,0.1347,BT_c + group
+7,3,-100.4303,-93.1738,0.1099,adaptation_c + group
+8,4,-106.5858,-96.9105,0.183,BT_c + adaptation_c + group
+9,4,-104.3488,-94.6735,0.1607,BT_c + adaptation_c + BT_c:adaptation_c
+10,4,-105.652,-95.9767,0.1738,BT_c + group + BT_c:group
+11,4,-98.8316,-89.1563,0.103,adaptation_c + group + adaptation_c:group
+12,5,-108.5818,-96.4876,0.2114,BT_c + adaptation_c + group + BT_c:adaptation_c
+13,5,-109.337,-97.2428,0.2186,BT_c + adaptation_c + group + BT_c:group
+14,5,-104.9261,-92.8319,0.1759,BT_c + adaptation_c + group + adaptation_c:group
+15,6,-109.7191,-95.206,0.2308,BT_c + adaptation_c + group + BT_c:adaptation_c + BT_c:group
+16,6,-109.5824,-95.0694,0.2296,BT_c + adaptation_c + group + BT_c:adaptation_c + adaptation_c:group
+17,6,-108.5912,-94.0781,0.2203,BT_c + adaptation_c + group + BT_c:group + adaptation_c:group
+18,7,-111.767,-94.8351,0.2578,BT_c + adaptation_c + group + BT_c:adaptation_c + BT_c:group + adaptation_c:group
+19,8,-109.7833,-90.4326,0.2481,BT_c + adaptation_c + group + BT_c:adaptation_c + BT_c:group + adaptation_c:group + BT_c:adaptation_c:group

@@ -1,0 +1,83 @@
+events (encounters 1-4): 2528 | MS: 1255 | participants: 83 
+3-way group x MS x encounter: b=0.327 [0.052, 0.601], t(2494)=2.33, p=0.0198
+group main effect, averaged over event type and encounters (children - adults): -0.094, t(78)=-1.14, p=0.260
+
+Slope of encounter by group and event type:
+ group MSevent encounter.trend         SE      df   lower.CL   upper.CL t.ratio
+ adult FALSE        0.05899436 0.07607135 2515.16 -0.0901745  0.2081633   0.776
+ child FALSE       -0.03400444 0.07211905 2518.94 -0.1754231  0.1074143  -0.472
+ adult TRUE        -0.27320528 0.06402512 2509.93 -0.3987528 -0.1476578  -4.267
+ child TRUE        -0.03939159 0.06839695 2500.06 -0.1735121  0.0947289  -0.576
+ p.value
+  0.4381
+  0.6373
+  <.0001
+  0.5647
+
+Degrees-of-freedom method: kenward-roger 
+Confidence level used: 0.95 
+
+omnibus 3-way (encounter as factor): F(3, 2470)=2.56, p=0.0534
+
+Encounter contrasts (Tukey within group x event type):
+      contrast group MSevent estimate lower.CL upper.CL   df t.ratio  p.value
+ encF1 - encF2 adult   FALSE  -0.0708  -0.4636    0.322 2480 -0.4634 9.67e-01
+ encF1 - encF3 adult   FALSE  -0.2856  -0.8656    0.294 2495 -1.2659 5.85e-01
+ encF1 - encF4 adult   FALSE   0.0286  -0.7655    0.823 2493  0.0926 1.00e+00
+ encF2 - encF3 adult   FALSE  -0.2148  -0.8508    0.421 2474 -0.8682 8.21e-01
+ encF2 - encF4 adult   FALSE   0.0994  -0.7368    0.936 2486  0.3056 9.90e-01
+ encF3 - encF4 adult   FALSE   0.3142  -0.6227    1.251 2470  0.8622 8.24e-01
+ encF1 - encF2 child   FALSE   0.1612  -0.2535    0.576 2489  0.9995 7.50e-01
+ encF1 - encF3 child   FALSE   0.0641  -0.4815    0.610 2487  0.3021 9.90e-01
+ encF1 - encF4 child   FALSE   0.0398  -0.6619    0.741 2502  0.1457 9.99e-01
+ encF2 - encF3 child   FALSE  -0.0971  -0.7042    0.510 2459 -0.4112 9.77e-01
+ encF2 - encF4 child   FALSE  -0.1215  -0.8712    0.628 2480 -0.4164 9.76e-01
+ encF3 - encF4 child   FALSE  -0.0243  -0.8525    0.804 2467 -0.0756 1.00e+00
+ encF1 - encF2 adult    TRUE   0.0768  -0.3066    0.460 2455  0.5151 9.55e-01
+ encF1 - encF3 adult    TRUE   0.8433   0.3856    1.301 2481  4.7373 1.36e-05
+ encF1 - encF4 adult    TRUE   0.5492  -0.0478    1.146 2499  2.3651 8.42e-02
+ encF2 - encF3 adult    TRUE   0.7664   0.2731    1.260 2467  3.9940 3.89e-04
+ encF2 - encF4 adult    TRUE   0.4723  -0.1526    1.097 2494  1.9431 2.10e-01
+ encF3 - encF4 adult    TRUE  -0.2941  -0.9653    0.377 2473 -1.1264 6.73e-01
+ encF1 - encF2 child    TRUE   0.0221  -0.3945    0.439 2459  0.1362 9.99e-01
+ encF1 - encF3 child    TRUE   0.0850  -0.4080    0.578 2469  0.4433 9.71e-01
+ encF1 - encF4 child    TRUE   0.1135  -0.5112    0.738 2490  0.4669 9.66e-01
+ encF2 - encF3 child    TRUE   0.0630  -0.4639    0.590 2455  0.3072 9.90e-01
+ encF2 - encF4 child    TRUE   0.0914  -0.5600    0.743 2478  0.3607 9.84e-01
+ encF3 - encF4 child    TRUE   0.0284  -0.6733    0.730 2464  0.1042 1.00e+00
+
+MS vs control at each encounter (estimate = control - MS):
+ group encF estimate lower.CL upper.CL   df t.ratio  p.value
+ adult    1   -0.912   -1.151  -0.6722 2470  -7.464 1.16e-13
+ child    1   -0.597   -0.860  -0.3342 2470  -4.454 8.81e-06
+ adult    2   -0.764   -1.107  -0.4208 2465  -4.364 1.33e-05
+ child    2   -0.736   -1.099  -0.3735 2467  -3.980 7.10e-05
+ adult    3    0.217   -0.292   0.7266 2483   0.836 4.04e-01
+ child    3   -0.576   -1.071  -0.0819 2456  -2.286 2.24e-02
+ adult    4   -0.391   -1.108   0.3257 2473  -1.070 2.85e-01
+ child    4   -0.523   -1.188   0.1408 2472  -1.545 1.22e-01
+
+Adults - children, MS encounter 1: 0.275 s [-0.013, 0.563], t(676)=1.88, p=0.061
+
+Children only (n events=1187): MS - control (mean age, averaged over encounters)=0.594 [0.357, 0.830], t(1153)=4.93, p=0.0000; age x MS: F(1, 1151)=0.78, p=0.376
+
+Supplement: three-way interaction and MS-event slopes by encounter range
+ encounters events threeway_b threeway_p adult_MS_slope  adult_p child_MS_slope
+        1-3   2344      0.511    0.00665         -0.362 2.70e-05        -0.0392
+        1-4   2528      0.327    0.01981         -0.273 2.05e-05        -0.0394
+        1-5   2625      0.232    0.04825         -0.265 1.14e-06        -0.0982
+        1-6   2680      0.107    0.30129         -0.248 5.69e-07        -0.0907
+        all   2736      0.148    0.07176         -0.207 1.91e-06        -0.0831
+ child_p
+  0.6738
+  0.5647
+  0.0724
+  0.0532
+  0.0246
+
+Supplement: trial-level search model (734 trials, 83 participants): backtracking x group b=-0.442, z=-1.66, p=0.097
+ group  BTz.trend        SE  df  asymp.LCL  asymp.UCL z.ratio p.value
+ adult -0.1180644 0.1931747 Inf -0.4966798  0.2605510  -0.611  0.5411
+ child -0.5597673 0.1833300 Inf -0.9190875 -0.2004471  -3.053  0.0023
+
+Confidence level used: 0.95 
