@@ -75,7 +75,9 @@ def compare(y, label):
     T, picks, chosen = select_model(D, y); X = D.dropna(subset=[y, "BT", "adaptation"])
     T.round(4).to_csv(RESULTS / f"model_comparison_{label}.csv", index=False)
     m, m_all, ex = fit_rule(D, f"{y} ~ {rhs(MODELS[chosen - 2])}", [y, "BT", "adaptation"])
-    coefs = {k: dict(b=m.params[k], t=m.tvalues[k], p=m.pvalues[k], p_all_data=m_all.pvalues[k]) for k in m.params.index if k != "Intercept"}
+    coefs = {k: dict(b=m.params[k], CI=list(m.conf_int().loc[k]), t=m.tvalues[k], df=m.df_resid, p=m.pvalues[k],
+                     all_data=dict(b=m_all.params[k], CI=list(m_all.conf_int().loc[k]), t=m_all.tvalues[k], df=m_all.df_resid, p=m_all.pvalues[k]),
+                     p_all_data=m_all.pvalues[k]) for k in m.params.index if k != "Intercept"}
     slopes = {}
     for pred, nm in [("BT_c", "backtracking"), ("adaptation_c", "adaptation")]:
         if pred in m.params:
@@ -85,6 +87,7 @@ def compare(y, label):
             else:
                 slopes[f"all_{nm}"] = lin(m, [pred])
     log.put(f"model_{label}", dict(n=len(X), picks=picks, chosen=chosen, formula=rhs(MODELS[chosen - 2]), excluded=ex, adjR2=m.rsquared_adj,
+                                   all_data=dict(adjR2=m_all.rsquared_adj, F=m_all.fvalue, F_df=[m_all.df_model, m_all.df_resid], F_p=m_all.f_pvalue),
                                    F=m.fvalue, F_df=[m.df_model, m.df_resid], F_p=m.f_pvalue, coefs=coefs, slopes=slopes))
     log(f"{label} (n={len(X)}): best by AIC={picks['AIC']}, BIC={picks['BIC']}, adjR2={picks['adjR2']} -> model {chosen}: {rhs(MODELS[chosen - 2])}")
     log(f"   excluded: {ex or 'none'}; adj R2={m.rsquared_adj:.3f}, F({m.df_model:.0f},{m.df_resid:.0f})={m.fvalue:.2f}, p={m.f_pvalue:.4f}")
@@ -102,8 +105,34 @@ for v in ["spatial_coverage", "object_count", "opt1", "BT", "success_proportion"
 log("\n=== VR AND VIDEO-GAME EXPERIENCE (1-7, 7 = strongly agree) ===")
 for v, label in [("vr_experience", "VR experience"), ("game_experience", "video-game experience")]:
     a, c = A[v].dropna(), C[v].dropna(); t, p = st.ttest_ind(a, c, equal_var=False)
-    log.put(f"q_{v}", dict(adult_M=a.mean(), adult_SD=a.std(), n_adult=len(a), child_M=c.mean(), child_SD=c.std(), n_child=len(c), t=t, p=p,
+    va, vc = a.var() / len(a), c.var() / len(c); dfw = (va + vc) ** 2 / (va ** 2 / (len(a) - 1) + vc ** 2 / (len(c) - 1))
+    log.put(f"q_{v}", dict(adult_M=a.mean(), adult_SD=a.std(), n_adult=len(a), child_M=c.mean(), child_SD=c.std(), n_child=len(c), t=t, df=dfw, p=p,
                            adult_agree=int((a >= 5).sum()), child_agree=int((c >= 5).sum())))
     log(f"  {label}: adults {a.mean():.2f} ({a.std():.2f}, n={len(a)}) vs children {c.mean():.2f} ({c.std():.2f}, n={len(c)}); Welch t={t:.2f}, p={p:.3f}; agree (5-7): adults {int((a>=5).sum())}, children {int((c>=5).sum())}")
 
+log("\n=== AGE PATTERNS OF BACKTRACKING AND ADAPTATION ===")
+r = reg(C, "adaptation ~ age", "age"); log.put("age_adaptation", r); log(f"  children: adaptation ~ age: {fmt(r)}")
+for lo, hi in [(7, 10), (11, 14)]:
+    cb = C[C.age.between(lo, hi)]
+    for v in ["BT", "adaptation"]:
+        a_, c_ = A[v].dropna(), cb[v].dropna(); t, pv = st.ttest_ind(c_, a_, equal_var=False)
+        va, vc = a_.var() / len(a_), c_.var() / len(c_); dfw = (va + vc) ** 2 / (va ** 2 / (len(a_) - 1) + vc ** 2 / (len(c_) - 1))
+        log.put(f"band_{lo}_{hi}_{v}", dict(child_M=c_.mean(), child_SD=c_.std(), n_child=len(c_), adult_M=a_.mean(), adult_SD=a_.std(), n_adult=len(a_), t=t, df=dfw, p=pv))
+        log(f"  exploratory: ages {lo}-{hi} (n={len(c_)}) vs adults, {v}: {c_.mean():.3f} ({c_.std():.3f}) vs {a_.mean():.3f} ({a_.std():.3f}), Welch t({dfw:.1f}) = {t:.2f}, p = {pv:.3f}")
+log("\n=== OBJECT COVERAGE AND SPATIAL COVERAGE ===")
+for v, key in [("object_count", "r_count_spatial"), ("opt1", "r_opt1_spatial_tmp")]:
+    xx = D.dropna(subset=[v, "spatial_coverage"]); rr, prr = st.pearsonr(xx[v], xx.spatial_coverage); zz = np.arctanh(rr); sez = 1 / np.sqrt(len(xx) - 3)
+    log.put(key, dict(r=rr, df=len(xx) - 2, p=prr, CI=[np.tanh(zz - 1.96 * sez), np.tanh(zz + 1.96 * sez)], n=len(xx)))
+    log(f"{v} vs spatial coverage: r({len(xx)-2}) = {rr:.3f}, 95% CI [{np.tanh(zz-1.96*sez):.3f}, {np.tanh(zz+1.96*sez):.3f}], p = {prr:.2g}")
+x = D.dropna(subset=["opt1", "spatial_coverage"]); r, pr = st.pearsonr(x.opt1, x.spatial_coverage); z = np.arctanh(r); se = 1 / np.sqrt(len(x) - 3)
+log.put("r_opt1_spatial", dict(r=r, df=len(x) - 2, p=pr, CI=[np.tanh(z - 1.96 * se), np.tanh(z + 1.96 * se)], n=len(x)))
+log(f"object coverage vs spatial coverage, all participants: r({len(x)-2}) = {r:.3f}, 95% CI [{np.tanh(z-1.96*se):.3f}, {np.tanh(z+1.96*se):.3f}], p = {pr:.2g}")
+log("\n=== TELEPORT STEPS (all measured steps) ===")
+TP = pd.read_csv(DATA / "teleports.csv"); stp = TP.step.dropna()
+tele = dict(n_steps=int(len(stp)), n_teleports=int(len(TP)), median=stp.median(), q1=stp.quantile(.25), q3=stp.quantile(.75), p95=stp.quantile(.95),
+            max=stp.max(), share_lt2=(stp < 2).mean(), share_lt25=(stp < 2.5).mean(), share_lt36=(stp < 3.6).mean(), share_lt05=(stp < 0.5).mean())
+log.put("teleport_steps", tele)
+log(f"steps measured for {tele['n_steps']} of {tele['n_teleports']} teleports: median {tele['median']:.2f} m (IQR {tele['q1']:.2f}-{tele['q3']:.2f}), "
+    f"95th percentile {tele['p95']:.2f} m, max {tele['max']:.2f} m; < 2 m {tele['share_lt2']:.1%}, < 2.5 m {tele['share_lt25']:.1%}, "
+    f"< 3.6 m {tele['share_lt36']:.1%}, < 0.5 m {tele['share_lt05']:.1%}")
 log.save("participant_stats")

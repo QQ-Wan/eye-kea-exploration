@@ -101,3 +101,18 @@ search_success (n=83): best by AIC=17, BIC=8, adjR2=17 -> model 17: BT_c + adapt
 === VR AND VIDEO-GAME EXPERIENCE (1-7, 7 = strongly agree) ===
   VR experience: adults 2.55 (1.60, n=42) vs children 4.17 (2.40, n=41); Welch t=-3.62, p=0.001; agree (5-7): adults 7, children 18
   video-game experience: adults 5.12 (2.07, n=42) vs children 5.78 (1.88, n=41); Welch t=-1.52, p=0.131; agree (5-7): adults 27, children 33
+
+=== AGE PATTERNS OF BACKTRACKING AND ADAPTATION ===
+  children: adaptation ~ age: b=+0.0294 [-0.0618, +0.1207], t(39)=+0.65, p=0.5179
+  exploratory: ages 7-10 (n=21) vs adults, BT: 106.400 (42.605) vs 59.911 (41.197), Welch t(38.9) = 4.13, p = 0.000
+  exploratory: ages 7-10 (n=21) vs adults, adaptation: -0.052 (0.783) vs -0.250 (0.591), Welch t(31.8) = 1.02, p = 0.316
+  exploratory: ages 11-14 (n=20) vs adults, BT: 71.808 (37.343) vs 59.911 (41.197), Welch t(41.0) = 1.13, p = 0.264
+  exploratory: ages 11-14 (n=20) vs adults, adaptation: 0.007 (0.248) vs -0.250 (0.591), Welch t(59.4) = 2.40, p = 0.019
+
+=== OBJECT COVERAGE AND SPATIAL COVERAGE ===
+object_count vs spatial coverage: r(81) = 0.615, 95% CI [0.460, 0.733], p = 6.1e-10
+opt1 vs spatial coverage: r(81) = -0.461, 95% CI [-0.615, -0.272], p = 1.2e-05
+object coverage vs spatial coverage, all participants: r(81) = -0.461, 95% CI [-0.615, -0.272], p = 1.2e-05
+
+=== TELEPORT STEPS (all measured steps) ===
+steps measured for 24926 of 26018 teleports: median 3.07 m (IQR 2.55-3.36), 95th percentile 3.63 m, max 7.87 m; < 2 m 15.9%, < 2.5 m 23.6%, < 3.6 m 93.9%, < 0.5 m 11.9%

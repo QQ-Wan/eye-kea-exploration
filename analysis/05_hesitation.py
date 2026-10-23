@@ -42,9 +42,12 @@ for var, unit, lab in [("pause", "s", "median pause between teleports"), ("step"
     for g in ["adult", "child"]:
         x = W.xs(g, level=1); o, r = x[(var, "outbound")], x[(var, "return")]
         t, p = st.ttest_rel(r, o); diffs[g] = r - o
-        log(f"{g:6s} (n={len(x)}): outbound {o.mean():.3f} {unit}, return {r.mean():.3f} {unit}; return - outbound = {(r - o).mean():+.3f} (paired t = {t:.2f}, p = {p:.3f})")
-    t, p = st.ttest_ind(diffs["child"], diffs["adult"], equal_var=False)
-    log(f"group x leg (return - outbound, children vs adults): Welch t = {t:.2f}, p = {p:.3f}")
+        log(f"{g:6s} (n={len(x)}): outbound M = {o.mean():.3f}, SD = {o.std():.3f} {unit}; return M = {r.mean():.3f}, SD = {r.std():.3f} {unit}; "
+            f"return - outbound = {(r - o).mean():+.3f}, paired t({len(x) - 1}) = {t:.2f}, p = {p:.3f}")
+    a_, c_ = diffs["adult"], diffs["child"]
+    t, p = st.ttest_ind(c_, a_, equal_var=False)
+    va, vc = a_.var() / len(a_), c_.var() / len(c_); dfw = (va + vc) ** 2 / (va ** 2 / (len(a_) - 1) + vc ** 2 / (len(c_) - 1))
+    log(f"group x leg (return - outbound, children vs adults): Welch t({dfw:.1f}) = {t:.2f}, p = {p:.3f}")
     for leg in ["outbound", "return"]:
         a_, c_ = W.xs("adult", level=1)[(var, leg)], W.xs("child", level=1)[(var, leg)]
         t, p = st.ttest_ind(c_, a_, equal_var=False)

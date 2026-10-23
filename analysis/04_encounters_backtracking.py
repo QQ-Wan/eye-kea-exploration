@@ -42,12 +42,14 @@ ms = E[E.event_type == "MS"].copy(); ms["enc_cat"] = np.where(ms.encounter >= 3,
 for g in ["adult", "child"]:
     x = ms[ms.group == g]
     tab = x.groupby("enc_cat").phase.value_counts(normalize=True).unstack(fill_value=0); n = x.groupby("enc_cat").size()
-    log(f"{g}: " + " | ".join(f"encounter {k}: return {tab.loc[k].get('return', 0):.0%}, outbound {tab.loc[k].get('outbound', 0):.0%}, outside {tab.loc[k].get('outside', 0):.0%} (n={n[k]})" for k in tab.index))
+    log(f"{g}: " + " | ".join(f"encounter {k}: return {tab.loc[k].get('return', 0):.1%}, outbound {tab.loc[k].get('outbound', 0):.1%}, outside {tab.loc[k].get('outside', 0):.1%} (n={n[k]})" for k in tab.index))
 ms["is_return"] = (ms.phase == "return").astype(int); ms["repeat"] = (ms.encounter >= 2).astype(int)
 for g in ["adult", "child"]:
     x = ms[ms.group == g]
     m = smf.logit("is_return ~ repeat", x).fit(disp=0, cov_type="cluster", cov_kwds={"groups": pd.factorize(x.code)[0]})
-    log(f"   {g}: repeat (vs first) encounter -> odds of being on a return leg: OR = {np.exp(m.params['repeat']):.2f}, p = {m.pvalues['repeat']:.3f} (SE clustered by participant)")
+    ci = np.exp(m.conf_int().loc["repeat"])
+    log(f"   {g}: repeat (vs first) encounter -> odds of being on a return leg: OR = {np.exp(m.params['repeat']):.2f}, 95% CI [{ci[0]:.2f}, {ci[1]:.2f}], "
+        f"z = {m.tvalues['repeat']:.2f}, p = {m.pvalues['repeat']:.2g} ({len(x)} MS events, {x.code.nunique()} participants; SE clustered by participant)")
 
 # ---- (3) does a backtracking turn follow the event within 10 s? MS vs control
 log("\n=== (3) Share of events followed by a backtracking turn within 10 s ===")
@@ -58,5 +60,7 @@ E["turn_10s"] = [turn_after(r) for r in E.itertuples()]
 for g in ["adult", "child"]:
     x = E[E.group == g].assign(ms=lambda d: (d.event_type == "MS").astype(int), turn=lambda d: d.turn_10s.astype(int))
     m = smf.logit("turn ~ ms", x).fit(disp=0, cov_type="cluster", cov_kwds={"groups": pd.factorize(x.code)[0]})
-    log(f"{g}: MS {x[x.ms == 1].turn.mean():.1%} vs control {x[x.ms == 0].turn.mean():.1%}; OR = {np.exp(m.params['ms']):.2f}, p = {m.pvalues['ms']:.3f}")
+    ci = np.exp(m.conf_int().loc["ms"])
+    log(f"{g}: MS {x[x.ms == 1].turn.mean():.1%} ({int(x[x.ms == 1].turn.sum())}/{int((x.ms == 1).sum())}) vs control {x[x.ms == 0].turn.mean():.1%} "
+        f"({int(x[x.ms == 0].turn.sum())}/{int((x.ms == 0).sum())}); OR = {np.exp(m.params['ms']):.2f}, 95% CI [{ci[0]:.2f}, {ci[1]:.2f}], z = {m.tvalues['ms']:.2f}, p = {m.pvalues['ms']:.3f}")
 (RESULTS / "encounters_backtracking.txt").write_text("\n".join(log.lines) + "\n")

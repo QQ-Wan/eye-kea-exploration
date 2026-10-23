@@ -25,9 +25,11 @@ def p_pair(D, f, terms, need):
     m, m_all, ex = fit_rule(D, f, need)
     return lin(m, terms), lin(m_all, terms), ex
 
-def cell(D, f, terms, need):
-    r, ra, _ = p_pair(D, f, terms, need)
-    return f"b={r['b']:+.4f}, p={r['p']:.3f} [{ra['p']:.3f}]"
+FULL = {}   # every estimate in full, saved to object_measures.json
+def cell(D, f, terms, need, key=None):
+    r, ra, ex = p_pair(D, f, terms, need)
+    if key: FULL[key] = dict(rule=r, all_data=ra, excluded=ex)
+    return f"b={r['b']:+.4f} [{r['CI'][0]:+.4f}, {r['CI'][1]:+.4f}], t({r['df']:.0f})={r['t']:+.2f}, p={r['p']:.3f} [no excl. p={ra['p']:.3f}]"
 
 # ------------------------------------------------------------------ measures side by side (encounters 1-4)
 D, E = load()
@@ -35,18 +37,26 @@ rows = {}
 for y, lab, cov in MEASURES:
     col = {}
     A, C = D[D.group == "adult"], D[D.group == "child"]
-    col["r with spatial coverage (adults / children)"] = f"{st.pearsonr(A[y], A.spatial_coverage)[0]:+.2f} / {st.pearsonr(C[y], C.spatial_coverage)[0]:+.2f}"
+    ra_, pa_ = st.pearsonr(A[y], A.spatial_coverage); rc_, pc_ = st.pearsonr(C[y], C.spatial_coverage)
+    FULL[f"{lab}|r_spatial"] = dict(adults=dict(r=ra_, df=len(A) - 2, p=pa_), children=dict(r=rc_, df=len(C) - 2, p=pc_))
+    col["r with spatial coverage (adults / children)"] = f"r({len(A)-2}) = {ra_:+.2f}, p = {pa_:.3f} / r({len(C)-2}) = {rc_:+.2f}, p = {pc_:.3g}"
     if cov:
-        m = smf.ols(f"{y} ~ group{cov}", D).fit()
-        col["adults vs children"] = f"controlling spatial coverage: t={-m.tvalues['group' + CH]:.2f}, p={m.pvalues['group' + CH]:.3f}"
+        m = smf.ols(f"{y} ~ group{cov}", D).fit(); ci = m.conf_int().loc["group" + CH]
+        FULL[f"{lab}|group"] = dict(b=-m.params["group" + CH], CI=[-ci[1], -ci[0]], t=-m.tvalues["group" + CH], df=m.df_resid, p=m.pvalues["group" + CH])
+        col["adults vs children"] = (f"controlling spatial coverage: adults - children b={-m.params['group' + CH]:+.4f} [{-ci[1]:+.4f}, {-ci[0]:+.4f}], "
+                                     f"t({m.df_resid:.0f})={-m.tvalues['group' + CH]:.2f}, p={m.pvalues['group' + CH]:.3f}")
     else:
-        r = ttest(D, y); col["adults vs children"] = f"{r['adult_M']:.3f} vs {r['child_M']:.3f}; d={r['d']:.2f}, p={r['p']:.3f}"
-    m = smf.ols(f"{y} ~ age{cov}", C).fit(); col["age effect, children"] = f"b={m.params['age']:+.4f}, p={m.pvalues['age']:.3f}"
+        r = ttest(D, y); FULL[f"{lab}|group"] = r
+        col["adults vs children"] = (f"adults M={r['adult_M']:.3f}, SD={r['adult_SD']:.3f}; children M={r['child_M']:.3f}, SD={r['child_SD']:.3f}; "
+                                     f"t({r['df']:.0f})={r['t']:.2f}, p={r['p']:.3f}, d={r['d']:.2f}")
+    m = smf.ols(f"{y} ~ age{cov}", C).fit(); ci = m.conf_int().loc["age"]
+    FULL[f"{lab}|age_children"] = dict(b=m.params["age"], CI=list(ci), t=m.tvalues["age"], df=m.df_resid, p=m.pvalues["age"])
+    col["age effect, children"] = f"b={m.params['age']:+.4f} [{ci[0]:+.4f}, {ci[1]:+.4f}], t({m.df_resid:.0f})={m.tvalues['age']:+.2f}, p={m.pvalues['age']:.3f}"
     for x, xl in [("BT", "backtracking"), ("adaptation", "adaptation")]:
         f = f"{y} ~ {x}*group{cov}"
-        col[f"{xl} -> measure: children"] = cell(D, f, [x, f"{x}:group{CH}"], [y, x])
-        col[f"{xl} -> measure: adults"] = cell(D, f, [x], [y, x])
-        col[f"{xl} -> measure: interaction"] = cell(D, f, [f"{x}:group{CH}"], [y, x])
+        col[f"{xl} -> measure: children"] = cell(D, f, [x, f"{x}:group{CH}"], [y, x], f"{lab}|{xl}|children")
+        col[f"{xl} -> measure: adults"] = cell(D, f, [x], [y, x], f"{lab}|{xl}|adults")
+        col[f"{xl} -> measure: interaction"] = cell(D, f, [f"{x}:group{CH}"], [y, x], f"{lab}|{xl}|interaction")
     T, picks, chosen = select_model(D, y, cov)
     col["best joint model (AIC, BIC, adj R2 -> chosen)"] = f"{picks['AIC']}, {picks['BIC']}, {picks['adjR2']} -> model {chosen}: {rhs(MODELS[chosen - 2])}"
     if lab == "all objects":
@@ -67,12 +77,15 @@ for rl, cap in ENCOUNTER_RANGES.items():
         f = f"{y} ~ adaptation*group{cov}"
         c, ca, _ = p_pair(Dk, f, ["adaptation", f"adaptation:group{CH}"], [y, "adaptation"])
         i, ia, _ = p_pair(Dk, f, [f"adaptation:group{CH}"], [y, "adaptation"])
+        FULL[f"range {rl}|{lab}|children"] = dict(rule=c, all_data=ca); FULL[f"range {rl}|{lab}|interaction"] = dict(rule=i, all_data=ia)
         row[f"{lab}: children"] = f"{c['p']:.3f} [{ca['p']:.3f}]"; row[f"{lab}: interaction"] = f"{i['p']:.3f} [{ia['p']:.3f}]"
     x = Dk.dropna(subset=["BT", "adaptation", "age", "n_ms_events"])
     for g, xg in [("adults", x[x.group == "adult"]), ("children", x[x.group == "child"]), ("all", x)]:
-        r = partial_r(xg); row[f"backtracking-adaptation r, {g}"] = f"{r['r']:.2f} (p={r['p']:.3f})"
+        r = partial_r(xg); row[f"backtracking-adaptation r, {g}"] = f"{r['r']:.2f} (p={r['p']:.3f})"; FULL[f"range {rl}|partial_r|{g}"] = r
     R.append(row)
 R = pd.DataFrame(R).set_index("encounters").T
 R.to_csv(RESULTS / "encounter_ranges_participant.csv")
 log(R.to_string())
 (RESULTS / "object_measures.txt").write_text("\n".join(log.lines) + "\n")
+import json
+json.dump(FULL, open(RESULTS / "object_measures.json", "w"), indent=1, default=float)

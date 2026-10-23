@@ -4,11 +4,11 @@ adult  (n=42): n_ms r=+0.28 (p=0.068); n_repeat r=+0.27 (p=0.081); mean_enc_per_
 child  (n=41): n_ms r=-0.42 (p=0.006); n_repeat r=-0.29 (p=0.071); mean_enc_per_obj r=-0.05 (p=0.744); max_enc r=-0.07 (p=0.646); n_objects r=-0.56 (p=0.000)
 
 === (2) Share of MS events on each leg of a backtracking episode, by encounter ===
-adult: encounter 1: return 5%, outbound 16%, outside 79% (n=311) | encounter 2: return 18%, outbound 10%, outside 72% (n=193) | encounter 3+: return 15%, outbound 12%, outside 73% (n=222)
-child: encounter 1: return 8%, outbound 21%, outside 71% (n=253) | encounter 2: return 23%, outbound 11%, outside 67% (n=168) | encounter 3+: return 22%, outbound 17%, outside 61% (n=236)
-   adult: repeat (vs first) encounter -> odds of being on a return leg: OR = 3.68, p = 0.000 (SE clustered by participant)
-   child: repeat (vs first) encounter -> odds of being on a return leg: OR = 3.34, p = 0.000 (SE clustered by participant)
+adult: encounter 1: return 5.1%, outbound 16.1%, outside 78.8% (n=311) | encounter 2: return 18.1%, outbound 9.8%, outside 72.0% (n=193) | encounter 3+: return 15.3%, outbound 11.7%, outside 73.0% (n=222)
+child: encounter 1: return 7.9%, outbound 20.9%, outside 71.1% (n=253) | encounter 2: return 22.6%, outbound 10.7%, outside 66.7% (n=168) | encounter 3+: return 22.0%, outbound 16.5%, outside 61.4% (n=236)
+   adult: repeat (vs first) encounter -> odds of being on a return leg: OR = 3.68, 95% CI [2.10, 6.44], z = 4.55, p = 5.4e-06 (726 MS events, 42 participants; SE clustered by participant)
+   child: repeat (vs first) encounter -> odds of being on a return leg: OR = 3.34, 95% CI [1.77, 6.32], z = 3.71, p = 0.00021 (657 MS events, 41 participants; SE clustered by participant)
 
 === (3) Share of events followed by a backtracking turn within 10 s ===
-adult: MS 7.6% vs control 7.9%; OR = 0.96, p = 0.850
-child: MS 10.4% vs control 12.8%; OR = 0.78, p = 0.319
+adult: MS 7.6% (55/726) vs control 7.9% (55/699); OR = 0.96, 95% CI [0.63, 1.47], z = -0.19, p = 0.850
+child: MS 10.4% (68/657) vs control 12.8% (84/654); OR = 0.78, 95% CI [0.48, 1.27], z = -1.00, p = 0.319

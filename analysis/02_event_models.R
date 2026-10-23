@@ -72,9 +72,11 @@ for (nm in names(rng)) {
   m <- lmer(stop_diff ~ group * MSevent * encounter + (1 | code), data = X)
   s <- co(m, "groupchild:MSeventTRUE:encounter")
   t <- as.data.frame(summary(emtrends(m, ~ group * MSevent, var = "encounter"), infer = TRUE)); t <- t[t$MSevent == "TRUE", ]
-  R <- rbind(R, data.frame(encounters = nm, events = nrow(X), threeway_b = s$b, threeway_p = s$p,
-                           adult_MS_slope = t$encounter.trend[t$group == "adult"], adult_p = t$p.value[t$group == "adult"],
-                           child_MS_slope = t$encounter.trend[t$group == "child"], child_p = t$p.value[t$group == "child"]))
+  ta <- t[t$group == "adult", ]; tc <- t[t$group == "child", ]
+  R <- rbind(R, data.frame(encounters = nm, events = nrow(X), threeway_b = s$b, threeway_lo = s$CI[1], threeway_hi = s$CI[2],
+                           threeway_t = s$t, threeway_df = s$df, threeway_p = s$p,
+                           adult_MS_slope = ta$encounter.trend, adult_lo = ta$lower.CL, adult_hi = ta$upper.CL, adult_t = ta$t.ratio, adult_df = ta$df, adult_p = ta$p.value,
+                           child_MS_slope = tc$encounter.trend, child_lo = tc$lower.CL, child_hi = tc$upper.CL, child_t = tc$t.ratio, child_df = tc$df, child_p = tc$p.value))
 }
 print(R, digits = 3, row.names = FALSE); out$encounter_ranges <- R
 write.csv(R, file.path(root, "results/encounter_ranges_event_model.csv"), row.names = FALSE)
@@ -87,7 +89,7 @@ g <- glmer(success ~ BTz * group + (1 | code) + (1 | target), data = Tr, family 
 gs <- summary(g)$coefficients
 sl <- as.data.frame(summary(emtrends(g, ~ group, var = "BTz"), infer = TRUE))
 out$search_glmm <- list(n_trials = nrow(Tr), n_participants = length(unique(Tr$code)),
-                        interaction = list(b = gs["BTz:groupchild", "Estimate"], z = gs["BTz:groupchild", "z value"], p = gs["BTz:groupchild", "Pr(>|z|)"]),
+                        interaction = list(b = gs["BTz:groupchild", "Estimate"], se = gs["BTz:groupchild", "Std. Error"], CI = gs["BTz:groupchild", "Estimate"] + c(-1, 1) * qnorm(.975) * gs["BTz:groupchild", "Std. Error"], z = gs["BTz:groupchild", "z value"], p = gs["BTz:groupchild", "Pr(>|z|)"]),
                         slopes = sl)
 cat(sprintf("\nSupplement: trial-level search model (%d trials, %d participants): backtracking x group b=%.3f, z=%.2f, p=%.3f\n",
             nrow(Tr), length(unique(Tr$code)), gs["BTz:groupchild", "Estimate"], gs["BTz:groupchild", "z value"], gs["BTz:groupchild", "Pr(>|z|)"]))
@@ -116,7 +118,9 @@ for (v in c("alt_longest")) {
   m3v <- lmer(as.formula(paste(v, "~ group * MSevent * encF + (1 | code)")), data = E4)
   s <- co(m1v, "groupchild:MSeventTRUE:encounter")
   mcv <- as.data.frame(summary(pairs(emmeans(m3v, ~ MSevent | group * encF)), infer = TRUE))
-  alt[[v]] <- list(threeway = s, ms_vs_control = mcv)
+  trv <- as.data.frame(summary(emtrends(m1v, ~ group * MSevent, var = "encounter"), infer = TRUE))
+  alt[[v]] <- list(threeway = s, ms_vs_control = mcv, slopes = trv)
+  print(trv, digits = 3, row.names = FALSE)
   cat(sprintf("%s: 3-way group x MS x encounter b=%.3f, t(%.0f)=%.2f, p=%.4f; MS vs control (estimate = control - MS):\n",
               "longest pause (s)", s$b, s$df, s$t, s$p))
   print(mcv[, c("group", "encF", "estimate", "df", "t.ratio", "p.value")], digits = 3, row.names = FALSE)

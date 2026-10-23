@@ -1,22 +1,22 @@
 backtracking episodes: 286 from 77 participants with both leg types (adults 39, children 38)
 
 === median pause between teleports ===
-adult  (n=39): outbound 1.055 s, return 0.883 s; return - outbound = -0.172 (paired t = -3.05, p = 0.004)
-child  (n=38): outbound 0.852 s, return 0.861 s; return - outbound = +0.010 (paired t = 0.20, p = 0.843)
-group x leg (return - outbound, children vs adults): Welch t = 2.45, p = 0.016
+adult  (n=39): outbound M = 1.055, SD = 0.804 s; return M = 0.883, SD = 0.543 s; return - outbound = -0.172, paired t(38) = -3.05, p = 0.004
+child  (n=38): outbound M = 0.852, SD = 0.405 s; return M = 0.861, SD = 0.459 s; return - outbound = +0.010, paired t(37) = 0.20, p = 0.843
+group x leg (return - outbound, children vs adults): Welch t(73.4) = 2.45, p = 0.016
    outbound leg, children vs adults: 0.852 vs 1.055, Welch t = -1.41, p = 0.165
    return   leg, children vs adults: 0.861 vs 0.883, Welch t = -0.19, p = 0.851
 
 === median step per teleport ===
-adult  (n=39): outbound 2.964 m, return 3.010 m; return - outbound = +0.046 (paired t = 1.03, p = 0.311)
-child  (n=38): outbound 3.061 m, return 2.902 m; return - outbound = -0.159 (paired t = -1.62, p = 0.114)
-group x leg (return - outbound, children vs adults): Welch t = -1.90, p = 0.063
+adult  (n=39): outbound M = 2.964, SD = 0.635 m; return M = 3.010, SD = 0.609 m; return - outbound = +0.046, paired t(38) = 1.03, p = 0.311
+child  (n=38): outbound M = 3.061, SD = 0.306 m; return M = 2.902, SD = 0.716 m; return - outbound = -0.159, paired t(37) = -1.62, p = 0.114
+group x leg (return - outbound, children vs adults): Welch t(51.9) = -1.90, p = 0.063
    outbound leg, children vs adults: 3.061 vs 2.964, Welch t = 0.86, p = 0.395
    return   leg, children vs adults: 2.902 vs 3.010, Welch t = -0.71, p = 0.480
 
 === teleports per second ===
-adult  (n=39): outbound 0.731 /s, return 0.743 /s; return - outbound = +0.013 (paired t = 0.45, p = 0.655)
-child  (n=38): outbound 0.724 /s, return 0.668 /s; return - outbound = -0.056 (paired t = -1.35, p = 0.186)
-group x leg (return - outbound, children vs adults): Welch t = -1.37, p = 0.175
+adult  (n=39): outbound M = 0.731, SD = 0.300 /s; return M = 0.743, SD = 0.285 /s; return - outbound = +0.013, paired t(38) = 0.45, p = 0.655
+child  (n=38): outbound M = 0.724, SD = 0.342 /s; return M = 0.668, SD = 0.308 /s; return - outbound = -0.056, paired t(37) = -1.35, p = 0.186
+group x leg (return - outbound, children vs adults): Welch t(65.2) = -1.37, p = 0.175
    outbound leg, children vs adults: 0.724 vs 0.731, Welch t = -0.10, p = 0.923
    return   leg, children vs adults: 0.668 vs 0.743, Welch t = -1.12, p = 0.267

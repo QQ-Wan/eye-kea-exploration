@@ -8,3 +8,4 @@ Rscript 02_event_models.R
 python3 03_object_measures.py
 python3 04_encounters_backtracking.py
 python3 05_hesitation.py
+Rscript 06_figures.R

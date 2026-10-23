@@ -1,75 +1,75 @@
 === OBJECT MEASURES (encounters 1-4; p after outlier rule [no exclusions]) ===
 
 all objects
-   r with spatial coverage (adults / children)      +0.25 / +0.74
-   adults vs children                               151.690 vs 112.976; d=1.29, p=0.000
-   age effect, children                             b=+5.8683, p=0.012
-   backtracking -> measure: children                b=-0.4367, p=0.000 [0.003]
-   backtracking -> measure: adults                  b=-0.1973, p=0.051 [0.067]
-   backtracking -> measure: interaction             b=-0.2394, p=0.096 [0.416]
-   adaptation -> measure: children                  b=+1.6460, p=0.842 [0.842]
-   adaptation -> measure: adults                    b=+2.8085, p=0.726 [0.726]
-   adaptation -> measure: interaction               b=-1.1624, p=0.920 [0.920]
+   r with spatial coverage (adults / children)      r(40) = +0.25, p = 0.112 / r(39) = +0.74, p = 3.48e-08
+   adults vs children                               adults M=151.690, SD=28.790; children M=112.976, SD=31.047; t(81)=5.89, p=0.000, d=1.29
+   age effect, children                             b=+5.8683 [+1.3438, +10.3927], t(39)=+2.62, p=0.012
+   backtracking -> measure: children                b=-0.4367 [-0.6386, -0.2348], t(78)=-4.31, p=0.000 [no excl. p=0.003]
+   backtracking -> measure: adults                  b=-0.1973 [-0.3952, +0.0006], t(78)=-1.98, p=0.051 [no excl. p=0.067]
+   backtracking -> measure: interaction             b=-0.2394 [-0.5221, +0.0434], t(78)=-1.69, p=0.096 [no excl. p=0.416]
+   adaptation -> measure: children                  b=+1.6460 [-14.7705, +18.0625], t(79)=+0.20, p=0.842 [no excl. p=0.842]
+   adaptation -> measure: adults                    b=+2.8085 [-13.1030, +18.7199], t(79)=+0.35, p=0.726 [no excl. p=0.726]
+   adaptation -> measure: interaction               b=-1.1624 [-24.0245, +21.6997], t(79)=-0.10, p=0.920 [no excl. p=0.920]
    best joint model (AIC, BIC, adj R2 -> chosen)    19, 6, 19 -> model 19: BT_c + adaptation_c + group + BT_c:adaptation_c + BT_c:group + adaptation_c:group + BT_c:adaptation_c:group
 
 Option 1 (main)
-   r with spatial coverage (adults / children)      -0.32 / -0.60
-   adults vs children                               0.282 vs 0.274; d=0.13, p=0.555
-   age effect, children                             b=-0.0033, p=0.530
-   backtracking -> measure: children                b=+0.0000, p=0.872 [0.428]
-   backtracking -> measure: adults                  b=-0.0000, p=0.886 [0.456]
-   backtracking -> measure: interaction             b=+0.0001, p=0.830 [0.278]
-   adaptation -> measure: children                  b=-0.0347, p=0.012 [0.039]
-   adaptation -> measure: adults                    b=+0.0140, p=0.336 [0.633]
-   adaptation -> measure: interaction               b=-0.0487, p=0.016 [0.245]
+   r with spatial coverage (adults / children)      r(40) = -0.32, p = 0.040 / r(39) = -0.60, p = 3.24e-05
+   adults vs children                               adults M=0.282, SD=0.052; children M=0.274, SD=0.066; t(81)=0.59, p=0.555, d=0.13
+   age effect, children                             b=-0.0033 [-0.0137, +0.0072], t(39)=-0.63, p=0.530
+   backtracking -> measure: children                b=+0.0000 [-0.0004, +0.0004], t(77)=+0.16, p=0.872 [no excl. p=0.428]
+   backtracking -> measure: adults                  b=-0.0000 [-0.0004, +0.0004], t(77)=-0.14, p=0.886 [no excl. p=0.456]
+   backtracking -> measure: interaction             b=+0.0001 [-0.0005, +0.0006], t(77)=+0.22, p=0.830 [no excl. p=0.278]
+   adaptation -> measure: children                  b=-0.0347 [-0.0615, -0.0079], t(76)=-2.58, p=0.012 [no excl. p=0.039]
+   adaptation -> measure: adults                    b=+0.0140 [-0.0148, +0.0428], t(76)=+0.97, p=0.336 [no excl. p=0.633]
+   adaptation -> measure: interaction               b=-0.0487 [-0.0880, -0.0094], t(76)=-2.47, p=0.016 [no excl. p=0.245]
    best joint model (AIC, BIC, adj R2 -> chosen)    3, 3, 19 -> model 3: adaptation_c
 
 Option 1 + spatial coverage
-   r with spatial coverage (adults / children)      -0.32 / -0.60
-   adults vs children                               controlling spatial coverage: t=2.31, p=0.023
-   age effect, children                             b=+0.0034, p=0.451
-   backtracking -> measure: children                b=-0.0003, p=0.177 [0.353]
-   backtracking -> measure: adults                  b=-0.0002, p=0.347 [0.366]
-   backtracking -> measure: interaction             b=-0.0001, p=0.748 [0.974]
-   adaptation -> measure: children                  b=-0.0210, p=0.132 [0.152]
-   adaptation -> measure: adults                    b=-0.0021, p=0.874 [0.922]
-   adaptation -> measure: interaction               b=-0.0189, p=0.321 [0.327]
+   r with spatial coverage (adults / children)      r(40) = -0.32, p = 0.040 / r(39) = -0.60, p = 3.24e-05
+   adults vs children                               controlling spatial coverage: adults - children b=+0.0276 [+0.0038, +0.0514], t(80)=2.31, p=0.023
+   age effect, children                             b=+0.0034 [-0.0056, +0.0123], t(38)=+0.76, p=0.451
+   backtracking -> measure: children                b=-0.0003 [-0.0007, +0.0001], t(77)=-1.36, p=0.177 [no excl. p=0.353]
+   backtracking -> measure: adults                  b=-0.0002 [-0.0006, +0.0002], t(77)=-0.95, p=0.347 [no excl. p=0.366]
+   backtracking -> measure: interaction             b=-0.0001 [-0.0006, +0.0005], t(77)=-0.32, p=0.748 [no excl. p=0.974]
+   adaptation -> measure: children                  b=-0.0210 [-0.0484, +0.0064], t(77)=-1.52, p=0.132 [no excl. p=0.152]
+   adaptation -> measure: adults                    b=-0.0021 [-0.0283, +0.0242], t(77)=-0.16, p=0.874 [no excl. p=0.922]
+   adaptation -> measure: interaction               b=-0.0189 [-0.0565, +0.0187], t(77)=-1.00, p=0.321 [no excl. p=0.327]
    best joint model (AIC, BIC, adj R2 -> chosen)    4, 4, 19 -> model 4: group
 
 Option 2
-   r with spatial coverage (adults / children)      -0.14 / -0.37
-   adults vs children                               0.234 vs 0.207; d=0.54, p=0.016
-   age effect, children                             b=+0.0006, p=0.891
-   backtracking -> measure: children                b=-0.0002, p=0.313 [0.783]
-   backtracking -> measure: adults                  b=-0.0003, p=0.112 [0.148]
-   backtracking -> measure: interaction             b=+0.0001, p=0.662 [0.392]
-   adaptation -> measure: children                  b=-0.0231, p=0.054 [0.059]
-   adaptation -> measure: adults                    b=+0.0163, p=0.202 [0.912]
-   adaptation -> measure: interaction               b=-0.0394, p=0.026 [0.198]
+   r with spatial coverage (adults / children)      r(40) = -0.14, p = 0.383 / r(39) = -0.37, p = 0.0176
+   adults vs children                               adults M=0.234, SD=0.048; children M=0.207, SD=0.052; t(81)=2.46, p=0.016, d=0.54
+   age effect, children                             b=+0.0006 [-0.0076, +0.0088], t(39)=+0.14, p=0.891
+   backtracking -> measure: children                b=-0.0002 [-0.0005, +0.0002], t(78)=-1.01, p=0.313 [no excl. p=0.783]
+   backtracking -> measure: adults                  b=-0.0003 [-0.0006, +0.0001], t(78)=-1.61, p=0.112 [no excl. p=0.148]
+   backtracking -> measure: interaction             b=+0.0001 [-0.0004, +0.0006], t(78)=+0.44, p=0.662 [no excl. p=0.392]
+   adaptation -> measure: children                  b=-0.0231 [-0.0466, +0.0004], t(77)=-1.96, p=0.054 [no excl. p=0.059]
+   adaptation -> measure: adults                    b=+0.0163 [-0.0089, +0.0415], t(77)=+1.29, p=0.202 [no excl. p=0.912]
+   adaptation -> measure: interaction               b=-0.0394 [-0.0739, -0.0050], t(77)=-2.28, p=0.026 [no excl. p=0.198]
    best joint model (AIC, BIC, adj R2 -> chosen)    19, 4, 19 -> model 19: BT_c + adaptation_c + group + BT_c:adaptation_c + BT_c:group + adaptation_c:group + BT_c:adaptation_c:group
 
 Option 1, 300 ms
-   r with spatial coverage (adults / children)      -0.24 / -0.75
-   adults vs children                               0.110 vs 0.133; d=-0.54, p=0.016
-   age effect, children                             b=-0.0057, p=0.192
-   backtracking -> measure: children                b=-0.0001, p=0.414 [0.649]
-   backtracking -> measure: adults                  b=-0.0001, p=0.410 [0.585]
-   backtracking -> measure: interaction             b=-0.0000, p=0.961 [0.479]
-   adaptation -> measure: children                  b=-0.0383, p=0.000 [0.001]
-   adaptation -> measure: adults                    b=+0.0018, p=0.850 [0.868]
-   adaptation -> measure: interaction               b=-0.0401, p=0.004 [0.012]
+   r with spatial coverage (adults / children)      r(40) = -0.24, p = 0.118 / r(39) = -0.75, p = 1.19e-08
+   adults vs children                               adults M=0.110, SD=0.025; children M=0.133, SD=0.056; t(81)=-2.45, p=0.016, d=-0.54
+   age effect, children                             b=-0.0057 [-0.0143, +0.0030], t(39)=-1.33, p=0.192
+   backtracking -> measure: children                b=-0.0001 [-0.0003, +0.0001], t(74)=-0.82, p=0.414 [no excl. p=0.649]
+   backtracking -> measure: adults                  b=-0.0001 [-0.0003, +0.0001], t(74)=-0.83, p=0.410 [no excl. p=0.585]
+   backtracking -> measure: interaction             b=-0.0000 [-0.0003, +0.0003], t(74)=-0.05, p=0.961 [no excl. p=0.479]
+   adaptation -> measure: children                  b=-0.0383 [-0.0578, -0.0189], t(77)=-3.92, p=0.000 [no excl. p=0.001]
+   adaptation -> measure: adults                    b=+0.0018 [-0.0170, +0.0206], t(77)=+0.19, p=0.850 [no excl. p=0.868]
+   adaptation -> measure: interaction               b=-0.0401 [-0.0672, -0.0131], t(77)=-2.95, p=0.004 [no excl. p=0.012]
    best joint model (AIC, BIC, adj R2 -> chosen)    11, 11, 11 -> model 11: adaptation_c + group + adaptation_c:group
 
 all objects, 300 ms
-   r with spatial coverage (adults / children)      +0.29 / +0.48
-   adults vs children                               61.952 vs 53.000; d=0.66, p=0.004
-   age effect, children                             b=+2.0423, p=0.070
-   backtracking -> measure: children                b=-0.2054, p=0.000 [0.002]
-   backtracking -> measure: adults                  b=-0.0470, p=0.250 [0.284]
-   backtracking -> measure: interaction             b=-0.1585, p=0.008 [0.168]
-   adaptation -> measure: children                  b=-2.3803, p=0.487 [0.831]
-   adaptation -> measure: adults                    b=+2.9328, p=0.376 [0.229]
-   adaptation -> measure: interaction               b=-5.3131, p=0.265 [0.322]
+   r with spatial coverage (adults / children)      r(40) = +0.29, p = 0.061 / r(39) = +0.48, p = 0.00139
+   adults vs children                               adults M=61.952, SD=12.550; children M=53.000, SD=14.618; t(81)=3.00, p=0.004, d=0.66
+   age effect, children                             b=+2.0423 [-0.1717, +4.2562], t(39)=+1.87, p=0.070
+   backtracking -> measure: children                b=-0.2054 [-0.2880, -0.1229], t(76)=-4.96, p=0.000 [no excl. p=0.002]
+   backtracking -> measure: adults                  b=-0.0470 [-0.1276, +0.0337], t(76)=-1.16, p=0.250 [no excl. p=0.284]
+   backtracking -> measure: interaction             b=-0.1585 [-0.2739, -0.0431], t(76)=-2.74, p=0.008 [no excl. p=0.168]
+   adaptation -> measure: children                  b=-2.3803 [-9.1657, +4.4050], t(77)=-0.70, p=0.487 [no excl. p=0.831]
+   adaptation -> measure: adults                    b=+2.9328 [-3.6189, +9.4845], t(77)=+0.89, p=0.376 [no excl. p=0.229]
+   adaptation -> measure: interaction               b=-5.3131 [-14.7453, +4.1190], t(77)=-1.12, p=0.265 [no excl. p=0.322]
    best joint model (AIC, BIC, adj R2 -> chosen)    19, 2, 19 -> model 19: BT_c + adaptation_c + group + BT_c:adaptation_c + BT_c:group + adaptation_c:group + BT_c:adaptation_c:group
 
 === ENCOUNTER RANGES: measure ~ adaptation x group; children's slope and the interaction (p after rule [no exclusions]) ===
