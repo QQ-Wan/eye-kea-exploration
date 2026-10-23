@@ -8,20 +8,21 @@ spatial_coverage: adults 0.631 (0.084) vs children 0.545 (0.167); t(81)=2.98, p=
 object_count: adults 151.690 (28.790) vs children 112.976 (31.047); t(81)=5.89, p=0.0000, Mdiff=38.715 [25.643, 51.787], d=1.29
 opt1: adults 0.282 (0.052) vs children 0.274 (0.066); t(81)=0.59, p=0.5551, Mdiff=0.008 [-0.018, 0.034], d=0.13
 distance_traveled: adults 403.572 (128.534) vs children 383.180 (168.378); t(81)=0.62, p=0.5363, Mdiff=20.392 [-44.932, 85.716], d=0.14
-  children: spatial_coverage ~ age: b=+0.0263 [+0.0013, +0.0512], t(39)=+2.13, p=0.0397
-  children: object_count ~ age: b=+5.8683 [+1.3438, +10.3927], t(39)=+2.62, p=0.0124
-  children: opt1 ~ age: b=-0.0033 [-0.0137, +0.0072], t(39)=-0.63, p=0.5297
+  children: spatial_coverage ~ age: b=+0.0320 [+0.0103, +0.0536], t(37)=+2.99, p=0.0049 (excluded: ['C05', 'C17']; all data p=0.0397)
+  children: object_count ~ age: b=+5.8683 [+1.3438, +10.3927], t(39)=+2.62, p=0.0124 (excluded: none; all data p=0.0124)
+  children: opt1 ~ age: b=-0.0049 [-0.0139, +0.0041], t(37)=-1.09, p=0.2808 (excluded: ['C05', 'C25']; all data p=0.5297)
 BT (Welch): adults 59.91 (41.20) vs children 89.53 (43.32); t(80.6)=-3.19, p=0.0020, Mdiff=-29.62 [-48.09, -11.14], d=-0.70
-  children: BT ~ age: b=-9.3229 [-15.4681, -3.1776], t(39)=-3.07, p=0.0039
+  children: BT ~ age: b=-11.3064 [-17.2926, -5.3202], t(38)=-3.82, p=0.0005 (excluded: ['C05']; all data p=0.0039)
 BT_distance (Welch): adults 109.23 (78.56) vs children 132.03 (71.38); t(80.6)=-1.38, p=0.1699, Mdiff=-22.80 [-55.57, 9.96], d=-0.30
-  children: BT_distance ~ age: b=-2.9309 [-14.1728, +8.3111], t(39)=-0.53, p=0.6009
+  children: BT_distance ~ age: b=-2.9309 [-14.1728, +8.3111], t(39)=-0.53, p=0.6009 (excluded: none; all data p=0.6009)
 teleport step (participant median, m): adults 3.06 (0.35) vs children 3.03 (0.32); t(80.6)=0.35, p=0.725, d=0.08
 number of teleports: adults 312.8 vs children 314.2; t(76.2)=-0.05, p=0.958
 
 === SEARCH ===
 success: adults 0.848 (0.136) vs children 0.740 (0.203); t(81)=2.84, p=0.0057, Mdiff=0.108 [0.032, 0.183], d=0.62
-  children: success ~ age: b=+0.0629 [+0.0380, +0.0877], t(39)=+5.11, p=0.0000
+  children: success ~ age: b=+0.0629 [+0.0380, +0.0877], t(39)=+5.11, p=0.0000 (excluded: none; all data p=0.0000)
 search time: adults 33.00 (11.63) vs children 37.83 (17.56); t(81)=-1.48, p=0.1430, Mdiff=-4.82 [-11.31, 1.67], d=-0.32
+  children: search time ~ age: b=-4.4011 [-6.7825, -2.0198], t(39)=-3.74, p=0.0006 (excluded: none; all data p=0.0006)
 
 === MODELS WITH ONE PREDICTOR (outlier rule applied per model; [all data] = no exclusions) ===
 spatial_coverage ~ BT x group  (excluded: ['C17', 'C31'])
@@ -90,20 +91,20 @@ search_success (n=83): best by AIC=17, BIC=8, adjR2=17 -> model 17: BT_c + adapt
       simple slope adults_adaptation        b=+0.0087 [-0.0760, +0.0933], t(77)=+0.20, p=0.8390
 
 === AGE EFFECTS WITHIN ADULTS ===
-  adults: spatial_coverage ~ age: t(40)=+0.03, p=0.977
-  adults: object_count ~ age: t(40)=+0.04, p=0.968
-  adults: opt1 ~ age: t(40)=+0.39, p=0.700
-  adults: BT ~ age: t(40)=-1.59, p=0.120
-  adults: success_proportion ~ age: t(40)=+0.70, p=0.490
-  adults: average_success_rt ~ age: t(40)=+1.94, p=0.059
-  adults: adaptation ~ age: t(40)=+0.48, p=0.636
+  adults: spatial_coverage ~ age: t(38)=+0.27, p=0.786 (excluded: ['A11', 'A32']; all data p=0.977)
+  adults: object_count ~ age: t(40)=+0.04, p=0.968 (excluded: none; all data p=0.968)
+  adults: opt1 ~ age: t(39)=+0.03, p=0.974 (excluded: ['A32']; all data p=0.700)
+  adults: BT ~ age: t(39)=-1.08, p=0.287 (excluded: ['A24']; all data p=0.120)
+  adults: success_proportion ~ age: t(39)=+0.50, p=0.620 (excluded: ['A37']; all data p=0.490)
+  adults: average_success_rt ~ age: t(39)=+2.35, p=0.024 (excluded: ['A33']; all data p=0.059)
+  adults: adaptation ~ age: t(38)=+1.34, p=0.189 (excluded: ['A32', 'A34']; all data p=0.636)
 
 === VR AND VIDEO-GAME EXPERIENCE (1-7, 7 = strongly agree) ===
   VR experience: adults 2.55 (1.60, n=42) vs children 4.17 (2.40, n=41); Welch t=-3.62, p=0.001; agree (5-7): adults 7, children 18
   video-game experience: adults 5.12 (2.07, n=42) vs children 5.78 (1.88, n=41); Welch t=-1.52, p=0.131; agree (5-7): adults 27, children 33
 
 === AGE PATTERNS OF BACKTRACKING AND ADAPTATION ===
-  children: adaptation ~ age: b=+0.0294 [-0.0618, +0.1207], t(39)=+0.65, p=0.5179
+  children: adaptation ~ age: b=-0.0223 [-0.0972, +0.0525], t(38)=-0.60, p=0.5495 (excluded: ['C29']; all data p=0.5179)
   exploratory: ages 7-10 (n=21) vs adults, BT: 106.400 (42.605) vs 59.911 (41.197), Welch t(38.9) = 4.13, p = 0.000
   exploratory: ages 7-10 (n=21) vs adults, adaptation: -0.052 (0.783) vs -0.250 (0.591), Welch t(31.8) = 1.02, p = 0.316
   exploratory: ages 11-14 (n=20) vs adults, BT: 71.808 (37.343) vs 59.911 (41.197), Welch t(41.0) = 1.13, p = 0.264

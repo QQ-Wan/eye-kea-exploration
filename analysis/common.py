@@ -59,6 +59,15 @@ def fit_rule(df, formula, need):
     mask = (ck > 4 / len(x)) & (rs > 2.5) if OUTLIER_RULE == "both" else (ck > 4 / len(x)) | (rs > 2.5)
     return smf.ols(formula, x[~mask]).fit(), m, x.code[mask].tolist()
 
+def reg_rule(df, formula, term):
+    """reg() with the outlier rule (as in fit_rule); the all-data estimate and the excluded codes are kept alongside."""
+    y = formula.split("~")[0].strip()
+    m, m_all, ex = fit_rule(df, formula, [y, term])
+    def coef(mm):
+        ci = mm.conf_int().loc[term]
+        return dict(b=mm.params[term], CI=[ci[0], ci[1]], t=mm.tvalues[term], df=mm.df_resid, p=mm.pvalues[term], n=int(mm.nobs))
+    return dict(coef(m), excluded=ex, all_data=coef(m_all))
+
 def partial_r(x, a="BT", b="adaptation", covs="age + n_ms_events"):
     """Partial correlation of a and b controlling for covs, with a Fisher-z 95% CI."""
     ra = smf.ols(f"{a} ~ {covs}", x).fit().resid; rb = smf.ols(f"{b} ~ {covs}", x).fit().resid

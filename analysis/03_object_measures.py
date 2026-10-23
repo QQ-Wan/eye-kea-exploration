@@ -49,9 +49,9 @@ for y, lab, cov in MEASURES:
         r = ttest(D, y); FULL[f"{lab}|group"] = r
         col["adults vs children"] = (f"adults M={r['adult_M']:.3f}, SD={r['adult_SD']:.3f}; children M={r['child_M']:.3f}, SD={r['child_SD']:.3f}; "
                                      f"t({r['df']:.0f})={r['t']:.2f}, p={r['p']:.3f}, d={r['d']:.2f}")
-    m = smf.ols(f"{y} ~ age{cov}", C).fit(); ci = m.conf_int().loc["age"]
-    FULL[f"{lab}|age_children"] = dict(b=m.params["age"], CI=list(ci), t=m.tvalues["age"], df=m.df_resid, p=m.pvalues["age"])
-    col["age effect, children"] = f"b={m.params['age']:+.4f} [{ci[0]:+.4f}, {ci[1]:+.4f}], t({m.df_resid:.0f})={m.tvalues['age']:+.2f}, p={m.pvalues['age']:.3f}"
+    r = reg_rule(C, f"{y} ~ age{cov}", "age"); FULL[f"{lab}|age_children"] = r
+    col["age effect, children"] = (f"b={r['b']:+.4f} [{r['CI'][0]:+.4f}, {r['CI'][1]:+.4f}], t({r['df']:.0f})={r['t']:+.2f}, p={r['p']:.3f} "
+                                   f"[no excl. p={r['all_data']['p']:.3f}]")
     for x, xl in [("BT", "backtracking"), ("adaptation", "adaptation")]:
         f = f"{y} ~ {x}*group{cov}"
         col[f"{xl} -> measure: children"] = cell(D, f, [x, f"{x}:group{CH}"], [y, x], f"{lab}|{xl}|children")
