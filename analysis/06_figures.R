@@ -1,7 +1,7 @@
 # Figures 3, 4b, 5 and 6 of the manuscript and Supplementary Figure S1 (regression scatterplots),
 # drawn from the shared data in data/ only. Figure 4a (example trajectories) needs raw head positions
 # and is not redrawn here.
-# Group comparisons use the same tests as the text: Student's t for spatial coverage, objects looked at and
+# Group comparisons use the same tests as the text: Student's t for spatial coverage, object coverage and
 # search success, Welch's t for backtracking duration. Error bars are standard errors of the mean.
 # Run from the repository root or from analysis/. Outputs: figures/*.png
 suppressMessages({library(ggplot2); library(patchwork); library(jsonlite)})
@@ -65,12 +65,12 @@ age_scatter <- function(v, lim) {
 }
 save <- function(p, name, w, h) { ggsave(file.path(out_dir, name), p, width = w, height = h, dpi = 300, bg = "white"); cat("saved", name, "\n") }
 
-# ---------------------------------------------------------------- Figure 3: spatial coverage and objects looked at
-lim_obj <- lim_for("object_count", 50)
+# ---------------------------------------------------------------- Figure 3: spatial coverage and object coverage
+lim_oc <- lim_for("opt1", 0.1)
 lim_sc <- c(0, 1)
 f3 <- (bars("spatial_coverage", "Spatial Coverage\n(Proportion of Grid Cells Visited)", lim_sc) | age_scatter("spatial_coverage", lim_sc)) /
-      (bars("object_count", "Objects Looked At\n(Number of Distinct Objects)", lim_obj) | age_scatter("object_count", lim_obj)) +
-  plot_annotation(title = "Global Exploration", tag_levels = list(c("a", "", "b", "")),
+      (bars("opt1", "Object Coverage\n(Share of Nearby Objects Looked At)", lim_oc) | age_scatter("opt1", lim_oc)) +
+  plot_annotation(title = "Spatial and Object Coverage", tag_levels = list(c("a", "", "b", "")),
                   theme = theme(plot.title = element_text(size = 26, face = "bold", hjust = 0.5)))
 save(f3, "fig3_global_exploration.png", 13, 12)
 
