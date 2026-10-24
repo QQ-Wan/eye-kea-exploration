@@ -1,4 +1,4 @@
-"""Supplement: object measures compared, and robustness to the number of encounters.
+"""Supplement: object measures compared.
 
 Object measures
   all objects        count of objects looked at (separate from, but correlated with, spatial coverage)
@@ -9,8 +9,7 @@ Object measures
   all objects, 300 ms
 Each goes through the same analyses as the main measure; p values are after the outlier rule,
 [in brackets] without exclusions.
-Encounter ranges: adaptation slopes from the first 3, 4 (main), 5, 6 or all encounters.
-Outputs: results/object_measures.txt, results/object_measures.csv, results/encounter_ranges_participant.csv
+Outputs: results/object_measures.txt, results/object_measures.csv, results/object_measures.json
 """
 import sys
 sys.dont_write_bytecode = True
@@ -67,25 +66,6 @@ log("=== OBJECT MEASURES (encounters 1-4; p after outlier rule [no exclusions]) 
 for lab in O.columns:
     log(f"\n{lab}"); [log(f"   {k:48s} {v}") for k, v in O[lab].items()]
 
-# ------------------------------------------------------------------ encounter ranges
-log("\n=== ENCOUNTER RANGES: measure ~ adaptation x group; children's slope and the interaction (p after rule [no exclusions]) ===")
-R = []
-for rl, cap in ENCOUNTER_RANGES.items():
-    Dk, _ = load(cap)
-    row = dict(encounters=rl)
-    for y, lab, cov in MEASURES[:5] + [("spatial_coverage", "spatial coverage", ""), ("success_proportion", "search success", "")]:
-        f = f"{y} ~ adaptation*group{cov}"
-        c, ca, _ = p_pair(Dk, f, ["adaptation", f"adaptation:group{CH}"], [y, "adaptation"])
-        i, ia, _ = p_pair(Dk, f, [f"adaptation:group{CH}"], [y, "adaptation"])
-        FULL[f"range {rl}|{lab}|children"] = dict(rule=c, all_data=ca); FULL[f"range {rl}|{lab}|interaction"] = dict(rule=i, all_data=ia)
-        row[f"{lab}: children"] = f"{c['p']:.3f} [{ca['p']:.3f}]"; row[f"{lab}: interaction"] = f"{i['p']:.3f} [{ia['p']:.3f}]"
-    x = Dk.dropna(subset=["BT", "adaptation", "age", "n_ms_events"])
-    for g, xg in [("adults", x[x.group == "adult"]), ("children", x[x.group == "child"]), ("all", x)]:
-        r = partial_r(xg); row[f"backtracking-adaptation r, {g}"] = f"{r['r']:.2f} (p={r['p']:.3f})"; FULL[f"range {rl}|partial_r|{g}"] = r
-    R.append(row)
-R = pd.DataFrame(R).set_index("encounters").T
-R.to_csv(RESULTS / "encounter_ranges_participant.csv")
-log(R.to_string())
 (RESULTS / "object_measures.txt").write_text("\n".join(log.lines) + "\n")
 import json
 json.dump(FULL, open(RESULTS / "object_measures.json", "w"), indent=1, default=float)

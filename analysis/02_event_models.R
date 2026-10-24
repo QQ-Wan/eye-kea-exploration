@@ -2,9 +2,8 @@
 #  1-3. Adaptation to multisensory (MS) events: change in stopping time (post - pre) by age group,
 #       event type (MS vs control) and encounter (first four encounters, counted across blocks).
 #       Degrees of freedom: Kenward-Roger; post-hoc contrasts Tukey-adjusted within each family.
-#  4.   Supplement: the main model for other encounter ranges.
-#  5.   Supplement: trial-level search model (logistic, crossed random effects).
-#  6.   Supplement: stopping measured as the longest pause in each window.
+#  4.   Supplement: trial-level search model (logistic, crossed random effects).
+#  5.   Supplement: stopping measured as the longest pause in each window.
 # Run from the repository root or from analysis/. Outputs: results/event_models.{txt,json}
 suppressMessages({library(lmerTest); library(emmeans); library(jsonlite)})
 root <- if (dir.exists("data")) "." else ".."
@@ -64,24 +63,7 @@ cat(sprintf("\nChildren only (n events=%d): MS - control (mean age, averaged ove
             nrow(K), out$children_ms_effect$estimate, out$children_ms_effect$CI[1], out$children_ms_effect$CI[2], msk$df, out$children_ms_effect$t, msk$p.value,
             out$children_age_x_ms$df2, out$children_age_x_ms$F, out$children_age_x_ms$p))
 
-# 4. supplement: main model for other encounter ranges
-cat("\nSupplement: three-way interaction and MS-event slopes by encounter range\n")
-rng <- list("1-3" = 3, "1-4" = 4, "1-5" = 5, "1-6" = 6, "all" = Inf); R <- NULL
-for (nm in names(rng)) {
-  X <- E[E$encounter <= rng[[nm]], ]
-  m <- lmer(stop_diff ~ group * MSevent * encounter + (1 | code), data = X)
-  s <- co(m, "groupchild:MSeventTRUE:encounter")
-  t <- as.data.frame(summary(emtrends(m, ~ group * MSevent, var = "encounter"), infer = TRUE)); t <- t[t$MSevent == "TRUE", ]
-  ta <- t[t$group == "adult", ]; tc <- t[t$group == "child", ]
-  R <- rbind(R, data.frame(encounters = nm, events = nrow(X), threeway_b = s$b, threeway_lo = s$CI[1], threeway_hi = s$CI[2],
-                           threeway_t = s$t, threeway_df = s$df, threeway_p = s$p,
-                           adult_MS_slope = ta$encounter.trend, adult_lo = ta$lower.CL, adult_hi = ta$upper.CL, adult_t = ta$t.ratio, adult_df = ta$df, adult_p = ta$p.value,
-                           child_MS_slope = tc$encounter.trend, child_lo = tc$lower.CL, child_hi = tc$upper.CL, child_t = tc$t.ratio, child_df = tc$df, child_p = tc$p.value))
-}
-print(R, digits = 3, row.names = FALSE); out$encounter_ranges <- R
-write.csv(R, file.path(root, "results/encounter_ranges_event_model.csv"), row.names = FALSE)
-
-# 5. supplement: trial-level search model (all trials, no exclusions)
+# 4. supplement: trial-level search model (all trials, no exclusions)
 Tr <- read.csv(file.path(root, "data/search_trials.csv"))
 Tr$BT <- S$BT[match(Tr$code, S$code)]; Tr$group <- factor(S$group[match(Tr$code, S$code)], levels = c("adult", "child"))
 bt <- unique(Tr[, c("code", "BT")]); Tr$BTz <- (Tr$BT - mean(bt$BT)) / sd(bt$BT)
@@ -95,7 +77,7 @@ cat(sprintf("\nSupplement: trial-level search model (%d trials, %d participants)
             nrow(Tr), length(unique(Tr$code)), gs["BTz:groupchild", "Estimate"], gs["BTz:groupchild", "z value"], gs["BTz:groupchild", "Pr(>|z|)"]))
 print(sl, digits = 3, row.names = FALSE)
 
-# 6. supplement: stopping measured as the longest pause in each 5-s window, rebuilt from the teleport times.
+# 5. supplement: stopping measured as the longest pause in each 5-s window, rebuilt from the teleport times.
 #    The main measure is the mean interval between teleports (one teleport: the longer time to a window
 #    edge; none: 5 s), which cannot tell even from uneven pauses. The main model is repeated with the
 #    longest teleport-free interval in the window (window edges included).

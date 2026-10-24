@@ -31,8 +31,8 @@ Tested with Python 3.8.10 (pandas 2.0.3, numpy 1.24.4, scipy 1.10.1, statsmodels
 | Script | Analyses | Output |
 |---|---|---|
 | `01_participant_stats.py` | Group differences; age effects; outcomes regressed on backtracking and adaptation; backtracking–adaptation correlation; model comparison; age effects within adults; VR and video-game experience | `participant_stats.*`, `model_comparison_*.csv` |
-| `02_event_models.R` | Mixed models of adaptation to multisensory events. Supplement: other encounter ranges; trial-level search model; longest-pause measure of stopping | `event_models.*`, `encounter_ranges_event_model.csv` |
-| `03_object_measures.py` | Supplement: alternative object measures; robustness to the number of encounters | `object_measures.*`, `encounter_ranges_participant.csv` |
+| `02_event_models.R` | Mixed models of adaptation to multisensory events. Supplement: trial-level search model; longest-pause measure of stopping | `event_models.*`, `encounter_ranges_event_model.csv` |
+| `03_object_measures.py` | Supplement: alternative object measures | `object_measures.*` |
 | `04_encounters_backtracking.py` | Supplement: repeated encounters and backtracking | `encounters_backtracking.txt` |
 | `05_hesitation.py` | Pauses and teleport steps on the outbound vs return legs of backtracking episodes | `hesitation.txt` |
 | `06_figures.R` | Figures 3, 4b, 5, 6 and S1. Figure 4a (example paths) needs raw head positions and is not drawn here | `figures/*.png`, `figure5_means.csv` |
@@ -45,7 +45,7 @@ Tested with Python 3.8.10 (pandas 2.0.3, numpy 1.24.4, scipy 1.10.1, statsmodels
 |---|---|
 | Participants | 42 adults; 41 children who completed both exploration blocks and the search task (49 tested; 7 lost to equipment malfunction, 1 with incomplete data) |
 | Outliers | Removed from a given regression model only if Cook's D > 4/n **and** \|studentized residual\| > 2.5. The rule is applied to each model separately, and results without exclusions are reported alongside |
-| Encounters with a multisensory object | Counted across both blocks. The first four encounters are analyzed; other ranges are in the supplement |
+| Encounters with a multisensory object | Counted across both blocks. The first four encounters are analyzed: 61 of 83 participants reached a fourth encounter with at least one object, 37 a fifth |
 | Adaptation | Per participant, the slope of the change in stopping time (5 s after minus 5 s before an event) across encounters with multisensory objects |
 | Joint models | Predictors centered at the sample mean. Models 2–19 are compared, and the model chosen by the majority of AIC, BIC and adjusted R² is reported |
 | Mixed models | Random intercepts for participants; Kenward–Roger degrees of freedom; Tukey-adjusted post-hoc contrasts |
