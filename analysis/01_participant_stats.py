@@ -111,15 +111,8 @@ for v, label in [("vr_experience", "VR experience"), ("game_experience", "video-
                            adult_agree=int((a >= 5).sum()), child_agree=int((c >= 5).sum())))
     log(f"  {label}: adults {a.mean():.2f} ({a.std():.2f}, n={len(a)}) vs children {c.mean():.2f} ({c.std():.2f}, n={len(c)}); Welch t={t:.2f}, p={p:.3f}; agree (5-7): adults {int((a>=5).sum())}, children {int((c>=5).sum())}")
 
-log("\n=== AGE PATTERNS OF BACKTRACKING AND ADAPTATION ===")
+log("\n=== AGE EFFECT ON ADAPTATION ===")
 r = reg_rule(C, "adaptation ~ age", "age"); log.put("age_adaptation", r); log(f"  children: adaptation ~ age: {fmt(r)} (excluded: {r['excluded'] or 'none'}; all data p={r['all_data']['p']:.4f})")
-for lo, hi in [(7, 10), (11, 14)]:
-    cb = C[C.age.between(lo, hi)]
-    for v in ["BT", "adaptation"]:
-        a_, c_ = A[v].dropna(), cb[v].dropna(); t, pv = st.ttest_ind(c_, a_, equal_var=False)
-        va, vc = a_.var() / len(a_), c_.var() / len(c_); dfw = (va + vc) ** 2 / (va ** 2 / (len(a_) - 1) + vc ** 2 / (len(c_) - 1))
-        log.put(f"band_{lo}_{hi}_{v}", dict(child_M=c_.mean(), child_SD=c_.std(), n_child=len(c_), adult_M=a_.mean(), adult_SD=a_.std(), n_adult=len(a_), t=t, df=dfw, p=pv))
-        log(f"  exploratory: ages {lo}-{hi} (n={len(c_)}) vs adults, {v}: {c_.mean():.3f} ({c_.std():.3f}) vs {a_.mean():.3f} ({a_.std():.3f}), Welch t({dfw:.1f}) = {t:.2f}, p = {pv:.3f}")
 log("\n=== OBJECT COVERAGE AND SPATIAL COVERAGE ===")
 for v, key in [("object_count", "r_count_spatial"), ("opt1", "r_opt1_spatial_tmp")]:
     xx = D.dropna(subset=[v, "spatial_coverage"]); rr, prr = st.pearsonr(xx[v], xx.spatial_coverage); zz = np.arctanh(rr); sez = 1 / np.sqrt(len(xx) - 3)
