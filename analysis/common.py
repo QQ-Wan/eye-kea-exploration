@@ -22,9 +22,7 @@ def load(max_encounter=MAX_ENCOUNTER):
     S = pd.read_csv(DATA / "subject_measures.csv")
     E = pd.read_csv(DATA / "events.csv")
     D = S.merge(P[["code", "age", "vr_experience", "game_experience"]], on="code").merge(adaptation_slopes(E, max_encounter), on="code", how="left")
-    D["opt1"] = D.seen_cells / D.avail_cells            # Option 1: share of objects in the grid cells entered that were looked at
-    D["opt1_300"] = D.seen_cells_300 / D.avail_cells    #   same, looked at for > 300 ms in one look
-    D["opt2"] = D.seen_rooms / D.avail_rooms            # Option 2: share of objects in the rooms entered that were looked at
+    D["opt1"] = D.seen_cells / D.avail_cells            # object coverage: share of objects in the grid cells entered that were looked at
     D["group"] = pd.Categorical(D.group, ["adult", "child"])
     for v in ["BT", "adaptation"]:
         D[v + "_c"] = D[v] - D[v].mean()

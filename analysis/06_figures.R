@@ -52,13 +52,17 @@ bars <- function(v, ylab, lim, welch = FALSE, top = max(D[[v]], na.rm = TRUE)) {
     annotate("text", x = 1.5, y = ys - diff(lim) * 0.01, label = stars(tt$p.value), size = 13, fontface = "bold", vjust = 0)
   g
 }
+AGE_KEY <- c(spatial_coverage = "age_spatial_coverage", opt1 = "age_opt1", BT = "age_BT", success_proportion = "age_success")
 age_scatter <- function(v, lim) {
-  am <- mean(D[D$group == "adult", v])
-  ggplot(C, aes(age, .data[[v]])) +
+  # line fitted after the outlier rule of the age regression reported in the text; excluded children as open circles
+  am <- mean(D[D$group == "adult", v]); ex <- unlist(PS[[AGE_KEY[[v]]]]$excluded)
+  X <- C; X$excluded <- X$code %in% ex
+  ggplot(X, aes(age, .data[[v]])) +
     geom_hline(yintercept = am, colour = ORANGE, linewidth = 1.5, alpha = 0.9) +
     annotate("text", x = 6.55, y = am - diff(lim) * 0.045, label = "Adult Mean", colour = ORANGE, size = 5.6, fontface = "bold", hjust = 0) +
-    geom_smooth(method = "lm", formula = y ~ x, colour = TEAL_L, fill = TEAL, alpha = 0.2, linewidth = 1.3) +
-    geom_point(colour = TEAL, size = 3.6, alpha = 0.75) +
+    geom_smooth(data = X[!X$excluded, ], method = "lm", formula = y ~ x, colour = TEAL_L, fill = TEAL, alpha = 0.2, linewidth = 1.3) +
+    geom_point(data = X[!X$excluded, ], colour = TEAL, size = 3.6, alpha = 0.75) +
+    geom_point(data = X[X$excluded, ], colour = TEAL_L, size = 3.6, shape = 21, fill = NA, stroke = 1.3) +
     scale_x_continuous(breaks = 7:14, limits = c(6.5, 14.5)) +
     scale_y_continuous(limits = lim, breaks = brk(lim), expand = expansion(mult = c(0, 0.02))) +
     labs(x = "Age (years)", y = NULL) + theme_eye()

@@ -66,8 +66,8 @@ def out(df, name, cols, sort):
 
 out(part.rename(columns={"Age": "age"}), "participants.csv", ["group", "age", "vr_experience", "game_experience"], [])
 out(S, "subject_measures.csv",
-    ["group", "spatial_coverage", "object_count", "object_count_300_single", "object_count_300_total",
-     "avail_cells", "seen_cells", "seen_cells_300", "avail_rooms", "seen_rooms",
+    ["group", "spatial_coverage", "object_count",
+     "avail_cells", "seen_cells",
      "BT", "BT_distance", "distance_traveled", "n_teleports", "step_median", "step_mean",
      "success_proportion", "n_search_trials", "average_success_rt"], [])
 out(E.rename(columns={"session": "block", "obj": "object", "t": "window_start", "diff": "stop_diff"}), "events.csv",

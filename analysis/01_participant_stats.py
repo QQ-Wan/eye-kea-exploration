@@ -2,9 +2,8 @@
 search outcomes on backtracking and adaptation, model comparison, and the reviewer-requested
 additions (age effects within adults, VR and video-game experience).
 
-Main object measure: Option 1, the share of catalogue objects in the grid cells a participant
-entered that they looked at. The count of all objects looked at is reported descriptively; analyses
-of the other object measures are in 03_object_measures.py.
+Object coverage (opt1): the share of catalogue objects in the grid cells a participant entered that
+they looked at. The count of all objects looked at is reported descriptively.
 Outputs: results/participant_stats.{txt,json}, results/model_comparison_*.csv
 """
 import sys

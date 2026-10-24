@@ -19,12 +19,8 @@ The adult form ran from 1 = strongly agree to 7 = strongly disagree. Adult respo
 |---|---|
 | `spatial_coverage` | Proportion of the 100 grid cells entered across both blocks |
 | `object_count` | Objects with a gaze fixation event (about 100 ms of gaze). Floors, walls, ceilings, doors and windows are excluded |
-| `object_count_300_single` | Same, counting an object only if one look at it lasted > 300 ms |
-| `object_count_300_total` | Same, counting an object only if total looking time exceeded 300 ms |
 | `avail_cells` | Catalogued furniture and decor objects located in the grid cells the participant entered |
 | `seen_cells` | Of those, objects with a fixation event. Object coverage = `seen_cells / avail_cells` |
-| `seen_cells_300` | Of those, objects with one look > 300 ms |
-| `avail_rooms`, `seen_rooms` | As above, for objects in the room outlines the participant entered. Objects outside every outline count as available if their grid cell was entered |
 | `BT` | Backtracking duration: time on the return phase of backtracking episodes, summed over blocks |
 | `BT_distance` | Path length of those return phases, summed over blocks |
 | `distance_traveled` | Path length through 5 m waypoints, mean of the two blocks |

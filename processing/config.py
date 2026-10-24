@@ -73,4 +73,3 @@ ADULT_QUESTIONNAIRE = RAW / "DA/scripts/Questionnaires/filtered_data/NAM_2_Quest
 GRID_BOUNDS = (-10.835, 51.456, -12.292, 56.145)   # x0, x1, z0, z1 of the store; 10 x 10 grid
 STRUCTURAL = ["floor", "ceiling", "wall", "door", "window", "sky", "ground", "terrain"]
 BT_SPACING_M = 5.0                                  # backtracking detector waypoint spacing
-LONG_LOOK_S = 0.3                                   # alternative looking criterion (supplement)

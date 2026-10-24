@@ -32,7 +32,6 @@ Tested with Python 3.8.10 (pandas 2.0.3, numpy 1.24.4, scipy 1.10.1, statsmodels
 |---|---|---|
 | `01_participant_stats.py` | Group differences; age effects; outcomes regressed on backtracking and adaptation; backtracking–adaptation correlation; model comparison; age effects within adults; VR and video-game experience | `participant_stats.*`, `model_comparison_*.csv` |
 | `02_event_models.R` | Mixed models of adaptation to multisensory events. Supplement: trial-level search model; longest-pause measure of stopping | `event_models.*`, `encounter_ranges_event_model.csv` |
-| `03_object_measures.py` | Supplement: alternative object measures | `object_measures.*` |
 | `04_encounters_backtracking.py` | Supplement: repeated encounters and backtracking | `encounters_backtracking.txt` |
 | `05_hesitation.py` | Pauses and teleport steps on the outbound vs return legs of backtracking episodes | `hesitation.txt` |
 | `06_figures.R` | Figures 3, 4b, 5, 6 and S1. Figure 4a (example paths) needs raw head positions and is not drawn here | `figures/*.png`, `figure5_means.csv` |
@@ -54,10 +53,7 @@ Tested with Python 3.8.10 (pandas 2.0.3, numpy 1.24.4, scipy 1.10.1, statsmodels
 
 - **Spatial coverage.** The proportion of 100 grid cells (10 × 10 over the store; 6.23 × 6.84 m each) entered across both blocks.
 - **Objects looked at.** Objects (not floors, walls, ceilings, doors or windows) with a gaze fixation event. The experiment software logs this event after about 100 ms of gaze on an object.
-- **Object coverage (main object measure).** Of the catalogued furniture and decor objects in the grid cells a participant entered, the share they looked at. This separates looking at objects from how far a participant traveled. Alternatives are in the supplement:
-  - objects in the rooms entered;
-  - spatial coverage as a covariate;
-  - a 300 ms looking criterion.
+- **Object coverage.** Of the catalogued furniture and decor objects in the grid cells a participant entered, the share they looked at. This separates looking at objects from how far a participant traveled.
 - **Backtracking.** Head positions are resampled to waypoints 5 m apart. An episode is a turn of at least 120° followed by a return path that runs alongside the outbound path. The criteria are:
   - within 8 m of the outbound path for at least 80% of points, in both directions;
   - at least 4 waypoints on each side of the turn;
