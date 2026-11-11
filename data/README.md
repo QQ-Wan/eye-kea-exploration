@@ -25,14 +25,14 @@ The adult form ran from 1 = strongly agree to 7 = strongly disagree. Adult respo
 | `BT_distance` | Path length of those return phases, summed over blocks |
 | `distance_traveled` | Path length through 5 m waypoints, mean of the two blocks |
 | `n_teleports` | Teleports in both blocks |
-| `step_median`, `step_mean` | Median and mean teleport step length. Only teleports with no other teleport between the two surrounding head samples are used |
+| `step_median`, `step_mean` | Median and mean teleport step length. Only teleports with no other teleport between the two surrounding head samples are used. `step_mean` is not used in the analyses |
 | `success_proportion` | Proportion of search trials ending on the target |
-| `n_search_trials` | Search trials completed (out of 9) |
+| `n_search_trials` | Search trials completed (out of 9). Not used in the analyses |
 | `average_success_rt` | Mean search time on successful trials |
 
 ## events.csv
 
-One row per multisensory (MS) or control event.
+One row per multisensory (MS) or control event. All encounters are included, but the analyses use only the first four with each object; rows with `encounter` above 4 (208 of 2,736) are not analyzed.
 
 | Column | Description |
 |---|---|

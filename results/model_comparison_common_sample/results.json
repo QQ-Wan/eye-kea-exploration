@@ -1,0 +1,1484 @@
+{
+ "spatial_coverage": {
+  "title": "Spatial Coverage",
+  "n": 81,
+  "excluded": [
+   "C17",
+   "C31"
+  ],
+  "table": [
+   {
+    "model": 1,
+    "k": 1,
+    "n": 81,
+    "AIC": -110.58301078634713,
+    "BIC": -108.18856163167469,
+    "formula": "Intercept only",
+    "dAIC": 20.052649505509578,
+    "dBIC": 12.234057961140905
+   },
+   {
+    "model": 2,
+    "k": 2,
+    "n": 81,
+    "AIC": -121.83461451657189,
+    "BIC": -117.04571620722702,
+    "formula": "Spatial Coverage = Total Backtracking Duration",
+    "dAIC": 8.80104577528482,
+    "dBIC": 3.3769033855885766
+   },
+   {
+    "model": 3,
+    "k": 2,
+    "n": 81,
+    "AIC": -108.71877725794474,
+    "BIC": -103.92987894859986,
+    "formula": "Spatial Coverage = Adaptation to Multisensory Events",
+    "dAIC": 21.916883033911972,
+    "dBIC": 16.49274064421573
+   },
+   {
+    "model": 4,
+    "k": 2,
+    "n": 81,
+    "AIC": -114.98148944242337,
+    "BIC": -110.1925911330785,
+    "formula": "Spatial Coverage = Age Group",
+    "dAIC": 15.654170849433342,
+    "dBIC": 10.230028459737099
+   },
+   {
+    "model": 5,
+    "k": 3,
+    "n": 81,
+    "AIC": -121.6720267610151,
+    "BIC": -114.48867929699779,
+    "formula": "Spatial Coverage = Total Backtracking Duration + Adaptation to Multisensory Events",
+    "dAIC": 8.963633530841605,
+    "dBIC": 5.933940295817806
+   },
+   {
+    "model": 6,
+    "k": 3,
+    "n": 81,
+    "AIC": -121.95540180976667,
+    "BIC": -114.77205434574935,
+    "formula": "Spatial Coverage = Total Backtracking Duration + Age Group",
+    "dAIC": 8.68025848209004,
+    "dBIC": 5.65056524706624
+   },
+   {
+    "model": 7,
+    "k": 3,
+    "n": 81,
+    "AIC": -114.00230727980181,
+    "BIC": -106.8189598157845,
+    "formula": "Spatial Coverage = Adaptation to Multisensory Events + Age Group",
+    "dAIC": 16.633353012054897,
+    "dBIC": 13.603659777031098
+   },
+   {
+    "model": 8,
+    "k": 4,
+    "n": 81,
+    "AIC": -122.63603977684,
+    "BIC": -113.05824315815023,
+    "formula": "Spatial Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group",
+    "dAIC": 7.999620515016716,
+    "dBIC": 7.36437643466536
+   },
+   {
+    "model": 9,
+    "k": 4,
+    "n": 81,
+    "AIC": -121.17981194643505,
+    "BIC": -111.60201532774529,
+    "formula": "Spatial Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events",
+    "dAIC": 9.455848345421657,
+    "dBIC": 8.820604265070301
+   },
+   {
+    "model": 10,
+    "k": 4,
+    "n": 81,
+    "AIC": -130.00041621150535,
+    "BIC": -120.4226195928156,
+    "formula": "Spatial Coverage = Total Backtracking Duration + Age Group + Total Backtracking Duration \u00d7 Age Group",
+    "dAIC": 0.6352440803513559,
+    "dBIC": 0.0
+   },
+   {
+    "model": 11,
+    "k": 4,
+    "n": 81,
+    "AIC": -112.05807990179585,
+    "BIC": -102.48028328310609,
+    "formula": "Spatial Coverage = Adaptation to Multisensory Events + Age Group + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 18.57758039006086,
+    "dBIC": 17.942336309709503
+   },
+   {
+    "model": 12,
+    "k": 5,
+    "n": 81,
+    "AIC": -122.53450687098336,
+    "BIC": -110.56226109762116,
+    "formula": "Spatial Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events",
+    "dAIC": 8.101153420873345,
+    "dBIC": 9.860358495194433
+   },
+   {
+    "model": 13,
+    "k": 5,
+    "n": 81,
+    "AIC": -130.0402532259015,
+    "BIC": -118.06800745253929,
+    "formula": "Spatial Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Age Group",
+    "dAIC": 0.5954070659552144,
+    "dBIC": 2.354612140276302
+   },
+   {
+    "model": 14,
+    "k": 5,
+    "n": 81,
+    "AIC": -120.91983876728563,
+    "BIC": -108.94759299392342,
+    "formula": "Spatial Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 9.715821524571084,
+    "dBIC": 11.475026598892171
+   },
+   {
+    "model": 15,
+    "k": 6,
+    "n": 81,
+    "AIC": -128.11983495647831,
+    "BIC": -113.75314002844368,
+    "formula": "Spatial Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events + Total Backtracking Duration \u00d7 Age Group",
+    "dAIC": 2.515825335378395,
+    "dBIC": 6.669479564371912
+   },
+   {
+    "model": 16,
+    "k": 6,
+    "n": 81,
+    "AIC": -120.71041954124956,
+    "BIC": -106.34372461321493,
+    "formula": "Spatial Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 9.925240750607145,
+    "dBIC": 14.078894979600662
+   },
+   {
+    "model": 17,
+    "k": 6,
+    "n": 81,
+    "AIC": -128.04280302572886,
+    "BIC": -113.67610809769423,
+    "formula": "Spatial Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Age Group + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 2.592857266127851,
+    "dBIC": 6.746511495121368
+   },
+   {
+    "model": 18,
+    "k": 7,
+    "n": 81,
+    "AIC": -126.14440877820158,
+    "BIC": -109.3832646954945,
+    "formula": "Spatial Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events + Total Backtracking Duration \u00d7 Age Group + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 4.491251513655129,
+    "dBIC": 11.03935489732109
+   },
+   {
+    "model": 19,
+    "k": 8,
+    "n": 81,
+    "AIC": -130.6356602918567,
+    "BIC": -111.48006705447719,
+    "formula": "Spatial Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events + Total Backtracking Duration \u00d7 Age Group + Adaptation to Multisensory Events \u00d7 Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 0.0,
+    "dBIC": 8.942552538338404
+   }
+  ],
+  "selection": {
+   "AIC_pick": 19,
+   "BIC_pick": 10,
+   "dAIC": 0.6352440803513559,
+   "dBIC": 8.942552538338404,
+   "chosen": 10,
+   "how": "BIC pick better by 8.94 on BIC and within 2 on AIC (0.64)",
+   "formula": "Total Backtracking Duration + Age Group + Total Backtracking Duration \u00d7 Age Group"
+  },
+  "selected": {
+   "common": {
+    "n": 81,
+    "R2": 0.26933129412992396,
+    "adjR2": 0.2408636822129081,
+    "F": 9.460972522564724,
+    "F_df": [
+     3.0,
+     77.0
+    ],
+    "F_p": 2.147749935113743e-05,
+    "coefs": {
+     "group[T.child]": {
+      "b": -0.03621447941054669,
+      "CI": [
+       -0.08633181449912934,
+       0.013902855678035966
+      ],
+      "t": -1.4388682312333578,
+      "df": 77.0,
+      "p": 0.15424048804646465,
+      "n": 81
+     },
+     "BT_c": {
+      "b": -3.39796837232217e-05,
+      "CI": [
+       -0.0008332104005105592,
+       0.0007652510330641159
+      ],
+      "t": -0.08465915177841343,
+      "df": 77.0,
+      "p": 0.93275210085528,
+      "n": 81
+     },
+     "BT_c:group[T.child]": {
+      "b": -0.0018426098750569668,
+      "CI": [
+       -0.0029933529996673536,
+       -0.0006918667504465803
+      ],
+      "t": -3.188465725946462,
+      "df": 77.0,
+      "p": 0.0020684255514888984,
+      "n": 81
+     }
+    },
+    "slopes": {
+     "children_backtracking": {
+      "b": -0.0018765895587801885,
+      "CI": [
+       -0.002704502597801603,
+       -0.001048676519758774
+      ],
+      "t": -4.51347790241841,
+      "df": 77.0,
+      "p": 2.256711635152558e-05
+     },
+     "adults_backtracking": {
+      "b": -3.39796837232217e-05,
+      "CI": [
+       -0.0008332104005105592,
+       0.0007652510330641159
+      ],
+      "t": -0.08465915177841343,
+      "df": 77.0,
+      "p": 0.93275210085528
+     }
+    }
+   },
+   "all_data": {
+    "n": 83,
+    "R2": 0.20400225883428125,
+    "adjR2": 0.17377449651153243,
+    "F": 6.748837596911804,
+    "F_df": [
+     3.0,
+     79.0
+    ],
+    "F_p": 0.000412360681260153,
+    "coefs": {
+     "group[T.child]": {
+      "b": -0.06350627108958341,
+      "CI": [
+       -0.12149845758467792,
+       -0.005514084594488898
+      ],
+      "t": -2.179708651554207,
+      "df": 79.0,
+      "p": 0.03225716767235909,
+      "n": 83
+     },
+     "BT_c": {
+      "b": -3.397968372324216e-05,
+      "CI": [
+       -0.00097769428421899,
+       0.0009097349167725057
+      ],
+      "t": -0.07166877418953756,
+      "df": 79.0,
+      "p": 0.9430466373683615,
+      "n": 83
+     },
+     "BT_c:group[T.child]": {
+      "b": -0.0014391692340583507,
+      "CI": [
+       -0.002749231083858197,
+       -0.00012910738425850484
+      ],
+      "t": -2.186610276895957,
+      "df": 79.0,
+      "p": 0.03173011468270982,
+      "n": 83
+     }
+    },
+    "slopes": {
+     "children_backtracking": {
+      "b": -0.001473148917781593,
+      "CI": [
+       -0.0023818099123841694,
+       -0.0005644879231790168
+      ],
+      "t": -3.226978587351434,
+      "df": 79.0,
+      "p": 0.0018218326979634054
+     },
+     "adults_backtracking": {
+      "b": -3.397968372324216e-05,
+      "CI": [
+       -0.00097769428421899,
+       0.0009097349167725057
+      ],
+      "t": -0.07166877418953756,
+      "df": 79.0,
+      "p": 0.9430466373683615
+     }
+    }
+   }
+  },
+  "single": {
+   "backtracking": {
+    "common": {
+     "interaction": {
+      "b": -0.0018426098750569668,
+      "CI": [
+       -0.0029933529996673536,
+       -0.0006918667504465803
+      ],
+      "t": -3.188465725946462,
+      "df": 77.0,
+      "p": 0.0020684255514888984,
+      "n": 81
+     },
+     "children": {
+      "b": -0.0018765895587801885,
+      "CI": [
+       -0.002704502597801603,
+       -0.001048676519758774
+      ],
+      "t": -4.51347790241841,
+      "df": 77.0,
+      "p": 2.256711635152558e-05
+     },
+     "adults": {
+      "b": -3.39796837232217e-05,
+      "CI": [
+       -0.0008332104005105592,
+       0.0007652510330641159
+      ],
+      "t": -0.08465915177841343,
+      "df": 77.0,
+      "p": 0.93275210085528
+     },
+     "n": 81
+    },
+    "all_data": {
+     "interaction": {
+      "b": -0.0014391692340583507,
+      "CI": [
+       -0.002749231083858197,
+       -0.00012910738425850484
+      ],
+      "t": -2.186610276895957,
+      "df": 79.0,
+      "p": 0.03173011468270982,
+      "n": 83
+     },
+     "children": {
+      "b": -0.001473148917781593,
+      "CI": [
+       -0.0023818099123841694,
+       -0.0005644879231790168
+      ],
+      "t": -3.226978587351434,
+      "df": 79.0,
+      "p": 0.0018218326979634054
+     },
+     "adults": {
+      "b": -3.397968372324216e-05,
+      "CI": [
+       -0.00097769428421899,
+       0.0009097349167725057
+      ],
+      "t": -0.07166877418953756,
+      "df": 79.0,
+      "p": 0.9430466373683615
+     },
+     "n": 83
+    }
+   },
+   "adaptation": {
+    "common": {
+     "interaction": {
+      "b": -0.01082077644511424,
+      "CI": [
+       -0.1043822439641465,
+       0.08274069107391802
+      ],
+      "t": -0.23029692913381503,
+      "df": 77.0,
+      "p": 0.8184717913249241,
+      "n": 81
+     },
+     "children": {
+      "b": 0.017027688894741468,
+      "CI": [
+       -0.05286798910482777,
+       0.08692336689431071
+      ],
+      "t": 0.4851009578948078,
+      "df": 77.0,
+      "p": 0.6289820408795935
+     },
+     "adults": {
+      "b": 0.027848465339855705,
+      "CI": [
+       -0.03434753454193304,
+       0.09004446522164444
+      ],
+      "t": 0.8915907632416948,
+      "df": 77.0,
+      "p": 0.37539001550543905
+     },
+     "n": 81
+    },
+    "all_data": {
+     "interaction": {
+      "b": 0.030596700646230948,
+      "CI": [
+       -0.06782275797155844,
+       0.12901615926402032
+      ],
+      "t": 0.6187923616078909,
+      "df": 79.0,
+      "p": 0.5378333947954901,
+      "n": 83
+     },
+     "children": {
+      "b": 0.0584451659860868,
+      "CI": [
+       -0.012226542959755865,
+       0.12911687493192947
+      ],
+      "t": 1.6460928233533658,
+      "df": 79.0,
+      "p": 0.1037175851006069
+     },
+     "adults": {
+      "b": 0.027848465339855858,
+      "CI": [
+       -0.040648975410093796,
+       0.0963459060898055
+      ],
+      "t": 0.809241674969269,
+      "df": 79.0,
+      "p": 0.420806770869366
+     },
+     "n": 83
+    }
+   }
+  }
+ },
+ "opt1": {
+  "title": "Object Coverage",
+  "n": 81,
+  "excluded": [
+   "C05",
+   "C25"
+  ],
+  "table": [
+   {
+    "model": 1,
+    "k": 1,
+    "n": 81,
+    "AIC": -241.56995159085886,
+    "BIC": -239.17550243618643,
+    "formula": "Intercept only",
+    "dAIC": 3.1603620090903632,
+    "dBIC": 0.7659128544179055
+   },
+   {
+    "model": 2,
+    "k": 2,
+    "n": 81,
+    "AIC": -241.24678458193785,
+    "BIC": -236.45788627259296,
+    "formula": "Object Coverage = Total Backtracking Duration",
+    "dAIC": 3.4835290180113816,
+    "dBIC": 3.4835290180113816
+   },
+   {
+    "model": 3,
+    "k": 2,
+    "n": 81,
+    "AIC": -244.73031359994923,
+    "BIC": -239.94141529060434,
+    "formula": "Object Coverage = Adaptation to Multisensory Events",
+    "dAIC": 0.0,
+    "dBIC": 0.0
+   },
+   {
+    "model": 4,
+    "k": 2,
+    "n": 81,
+    "AIC": -241.44935544186586,
+    "BIC": -236.66045713252097,
+    "formula": "Object Coverage = Age Group",
+    "dAIC": 3.280958158083365,
+    "dBIC": 3.280958158083365
+   },
+   {
+    "model": 5,
+    "k": 3,
+    "n": 81,
+    "AIC": -243.28786515608164,
+    "BIC": -236.10451769206432,
+    "formula": "Object Coverage = Total Backtracking Duration + Adaptation to Multisensory Events",
+    "dAIC": 1.4424484438675904,
+    "dBIC": 3.8368975985400198
+   },
+   {
+    "model": 6,
+    "k": 3,
+    "n": 81,
+    "AIC": -240.306673892336,
+    "BIC": -233.12332642831868,
+    "formula": "Object Coverage = Total Backtracking Duration + Age Group",
+    "dAIC": 4.423639707613233,
+    "dBIC": 6.818088862285663
+   },
+   {
+    "model": 7,
+    "k": 3,
+    "n": 81,
+    "AIC": -243.72199114547135,
+    "BIC": -236.53864368145403,
+    "formula": "Object Coverage = Adaptation to Multisensory Events + Age Group",
+    "dAIC": 1.0083224544778773,
+    "dBIC": 3.4027716091503066
+   },
+   {
+    "model": 8,
+    "k": 4,
+    "n": 81,
+    "AIC": -241.96864738370283,
+    "BIC": -232.39085076501308,
+    "formula": "Object Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group",
+    "dAIC": 2.7616662162463967,
+    "dBIC": 7.5505645255912555
+   },
+   {
+    "model": 9,
+    "k": 4,
+    "n": 81,
+    "AIC": -241.40895805020943,
+    "BIC": -231.8311614315197,
+    "formula": "Object Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events",
+    "dAIC": 3.321355549739792,
+    "dBIC": 8.11025385908465
+   },
+   {
+    "model": 10,
+    "k": 4,
+    "n": 81,
+    "AIC": -238.3792803378226,
+    "BIC": -228.80148371913285,
+    "formula": "Object Coverage = Total Backtracking Duration + Age Group + Total Backtracking Duration \u00d7 Age Group",
+    "dAIC": 6.351033262126634,
+    "dBIC": 11.139931571471493
+   },
+   {
+    "model": 11,
+    "k": 4,
+    "n": 81,
+    "AIC": -243.6647870380799,
+    "BIC": -234.08699041939016,
+    "formula": "Object Coverage = Adaptation to Multisensory Events + Age Group + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 1.0655265618693193,
+    "dBIC": 5.854424871214178
+   },
+   {
+    "model": 12,
+    "k": 5,
+    "n": 81,
+    "AIC": -240.0904096061655,
+    "BIC": -228.1181638328033,
+    "formula": "Object Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events",
+    "dAIC": 4.639903993783719,
+    "dBIC": 11.823251457801035
+   },
+   {
+    "model": 13,
+    "k": 5,
+    "n": 81,
+    "AIC": -240.00931548533197,
+    "BIC": -228.03706971196976,
+    "formula": "Object Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Age Group",
+    "dAIC": 4.7209981146172595,
+    "dBIC": 11.904345578634576
+   },
+   {
+    "model": 14,
+    "k": 5,
+    "n": 81,
+    "AIC": -241.96543463792074,
+    "BIC": -229.99318886455853,
+    "formula": "Object Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 2.76487896202849,
+    "dBIC": 9.948226426045807
+   },
+   {
+    "model": 15,
+    "k": 6,
+    "n": 81,
+    "AIC": -238.17865049460192,
+    "BIC": -223.8119555665673,
+    "formula": "Object Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events + Total Backtracking Duration \u00d7 Age Group",
+    "dAIC": 6.551663105347302,
+    "dBIC": 16.129459724037048
+   },
+   {
+    "model": 16,
+    "k": 6,
+    "n": 81,
+    "AIC": -240.07576445777016,
+    "BIC": -225.70906952973553,
+    "formula": "Object Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 4.654549142179064,
+    "dBIC": 14.23234576086881
+   },
+   {
+    "model": 17,
+    "k": 6,
+    "n": 81,
+    "AIC": -240.24797623928464,
+    "BIC": -225.88128131125,
+    "formula": "Object Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Age Group + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 4.482337360664587,
+    "dBIC": 14.060133979354333
+   },
+   {
+    "model": 18,
+    "k": 7,
+    "n": 81,
+    "AIC": -238.30890820552668,
+    "BIC": -221.54776412281961,
+    "formula": "Object Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events + Total Backtracking Duration \u00d7 Age Group + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 6.42140539442255,
+    "dBIC": 18.393651167784725
+   },
+   {
+    "model": 19,
+    "k": 8,
+    "n": 81,
+    "AIC": -242.3688720176254,
+    "BIC": -223.21327878024587,
+    "formula": "Object Coverage = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events + Total Backtracking Duration \u00d7 Age Group + Adaptation to Multisensory Events \u00d7 Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 2.3614415823238346,
+    "dBIC": 16.728136510358468
+   }
+  ],
+  "selection": {
+   "AIC_pick": 3,
+   "BIC_pick": 3,
+   "chosen": 3,
+   "how": "AIC and BIC agree",
+   "formula": "Adaptation to Multisensory Events"
+  },
+  "selected": {
+   "common": {
+    "n": 81,
+    "R2": 0.06172122529343982,
+    "adjR2": 0.049844278778166884,
+    "F": 5.196725034845506,
+    "F_df": [
+     1.0,
+     79.0
+    ],
+    "F_p": 0.025327378871223598,
+    "coefs": {
+     "adaptation_c": {
+      "b": -0.022441034033358606,
+      "CI": [
+       -0.0420353142064146,
+       -0.002846753860302611
+      ],
+      "t": -2.279632653487289,
+      "df": 79.0,
+      "p": 0.025327378871223653,
+      "n": 81
+     }
+    },
+    "slopes": {
+     "both_groups_adaptation": {
+      "b": -0.022441034033358606,
+      "CI": [
+       -0.0420353142064146,
+       -0.002846753860302611
+      ],
+      "t": -2.279632653487289,
+      "df": 79.0,
+      "p": 0.025327378871223653
+     }
+    }
+   },
+   "all_data": {
+    "n": 83,
+    "R2": 0.04224453011772811,
+    "adjR2": 0.030420388514243224,
+    "F": 3.57273547073199,
+    "F_df": [
+     1.0,
+     81.0
+    ],
+    "F_p": 0.06231218362553643,
+    "coefs": {
+     "adaptation_c": {
+      "b": -0.020592429164333,
+      "CI": [
+       -0.042269059158415015,
+       0.0010842008297490165
+      ],
+      "t": -1.890168106474123,
+      "df": 81.0,
+      "p": 0.06231218362553652,
+      "n": 83
+     }
+    },
+    "slopes": {
+     "both_groups_adaptation": {
+      "b": -0.020592429164333,
+      "CI": [
+       -0.042269059158415015,
+       0.0010842008297490165
+      ],
+      "t": -1.8901681064741231,
+      "df": 81.0,
+      "p": 0.06231218362553652
+     }
+    }
+   }
+  },
+  "single": {
+   "backtracking": {
+    "common": {
+     "interaction": {
+      "b": 7.670226030839371e-05,
+      "CI": [
+       -0.0005045265568901895,
+       0.0006579310775069768
+      ],
+      "t": 0.26277725473155655,
+      "df": 77.0,
+      "p": 0.7934240905835387,
+      "n": 81
+     },
+     "children": {
+      "b": -9.350760396263972e-05,
+      "CI": [
+       -0.0005061027852909713,
+       0.00031908757736569184
+      ],
+      "t": -0.45128357235726285,
+      "df": 77.0,
+      "p": 0.6530536271700982
+     },
+     "adults": {
+      "b": -0.00017020986427103343,
+      "CI": [
+       -0.0005795900717636579,
+       0.00023917034322159104
+      ],
+      "t": -0.8279128646630083,
+      "df": 77.0,
+      "p": 0.41027854474404235
+     },
+     "n": 81
+    },
+    "all_data": {
+     "interaction": {
+      "b": 0.00034483195836410767,
+      "CI": [
+       -0.0002835076873238914,
+       0.0009731716040521067
+      ],
+      "t": 1.0923564168632718,
+      "df": 79.0,
+      "p": 0.27799652627886934,
+      "n": 83
+     },
+     "children": {
+      "b": 0.0001746220940930656,
+      "CI": [
+       -0.00026119528925133,
+       0.0006104394774374613
+      ],
+      "t": 0.7975280407336554,
+      "df": 79.0,
+      "p": 0.4275350867605059
+     },
+     "adults": {
+      "b": -0.00017020986427104207,
+      "CI": [
+       -0.0006228398662794858,
+       0.0002824201377374017
+      ],
+      "t": -0.7485015544202394,
+      "df": 79.0,
+      "p": 0.45638037858221303
+     },
+     "n": 83
+    }
+   },
+   "adaptation": {
+    "common": {
+     "interaction": {
+      "b": -0.027272602835118412,
+      "CI": [
+       -0.06699427621267853,
+       0.01244907054244171
+      ],
+      "t": -1.367180323584351,
+      "df": 77.0,
+      "p": 0.17554682399642743,
+      "n": 81
+     },
+     "children": {
+      "b": -0.03470606005231971,
+      "CI": [
+       -0.06327032983810399,
+       -0.006141790266535427
+      ],
+      "t": -2.4194070121367712,
+      "df": 77.0,
+      "p": 0.017905036962287516
+     },
+     "adults": {
+      "b": -0.007433457217201297,
+      "CI": [
+       -0.0350358815222963,
+       0.02016896708789371
+      ],
+      "t": -0.5362537794158986,
+      "df": 77.0,
+      "p": 0.5933290393119708
+     },
+     "n": 81
+    },
+    "all_data": {
+     "interaction": {
+      "b": -0.026084276657680903,
+      "CI": [
+       -0.07045290744720238,
+       0.01828435413184058
+      ],
+      "t": -1.1701838219213947,
+      "df": 79.0,
+      "p": 0.2454450835485214,
+      "n": 83
+     },
+     "children": {
+      "b": -0.03351773387488213,
+      "CI": [
+       -0.06537735803375606,
+       -0.001658109716008202
+      ],
+      "t": -2.0940416653045872,
+      "df": 79.0,
+      "p": 0.0394627918949321
+     },
+     "adults": {
+      "b": -0.00743345721720123,
+      "CI": [
+       -0.03831289611417879,
+       0.02344598167977633
+      ],
+      "t": -0.47915140324565025,
+      "df": 79.0,
+      "p": 0.6331546132426511
+     },
+     "n": 83
+    }
+   }
+  }
+ },
+ "success_proportion": {
+  "title": "Target Search Success Rate",
+  "n": 83,
+  "excluded": [],
+  "table": [
+   {
+    "model": 1,
+    "k": 1,
+    "n": 83,
+    "AIC": -48.41249000387242,
+    "BIC": -45.993649396075824,
+    "formula": "Intercept only",
+    "dAIC": 19.002708849173075,
+    "dBIC": 7.423489436770232
+   },
+   {
+    "model": 2,
+    "k": 2,
+    "n": 83,
+    "AIC": -58.04803798139338,
+    "BIC": -53.210356765800185,
+    "formula": "Target Search Success Rate = Total Backtracking Duration",
+    "dAIC": 9.367160871652118,
+    "dBIC": 0.20678206704587154
+   },
+   {
+    "model": 3,
+    "k": 2,
+    "n": 83,
+    "AIC": -47.30314674907797,
+    "BIC": -42.465465533484775,
+    "formula": "Target Search Success Rate = Adaptation to Multisensory Events",
+    "dAIC": 20.112052103967528,
+    "dBIC": 10.951673299361282
+   },
+   {
+    "model": 4,
+    "k": 2,
+    "n": 83,
+    "AIC": -54.2935792725477,
+    "BIC": -49.45589805695451,
+    "formula": "Target Search Success Rate = Age Group",
+    "dAIC": 13.121619580497793,
+    "dBIC": 3.9612407758915467
+   },
+   {
+    "model": 5,
+    "k": 3,
+    "n": 83,
+    "AIC": -60.2740787969112,
+    "BIC": -53.0175569735214,
+    "formula": "Target Search Success Rate = Total Backtracking Duration + Adaptation to Multisensory Events",
+    "dAIC": 7.141120056134298,
+    "dBIC": 0.3995818593246554
+   },
+   {
+    "model": 6,
+    "k": 3,
+    "n": 83,
+    "AIC": -59.60926361688669,
+    "BIC": -52.3527417934969,
+    "formula": "Target Search Success Rate = Total Backtracking Duration + Age Group",
+    "dAIC": 7.805935236158803,
+    "dBIC": 1.06439703934916
+   },
+   {
+    "model": 7,
+    "k": 3,
+    "n": 83,
+    "AIC": -54.78819570816049,
+    "BIC": -47.53167388477069,
+    "formula": "Target Search Success Rate = Adaptation to Multisensory Events + Age Group",
+    "dAIC": 12.627003144885009,
+    "dBIC": 5.8854649480753665
+   },
+   {
+    "model": 8,
+    "k": 4,
+    "n": 83,
+    "AIC": -63.09250126403245,
+    "BIC": -53.41713883284606,
+    "formula": "Target Search Success Rate = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group",
+    "dAIC": 4.322697589013046,
+    "dBIC": 0.0
+   },
+   {
+    "model": 9,
+    "k": 4,
+    "n": 83,
+    "AIC": -58.314860657595176,
+    "BIC": -48.63949822640878,
+    "formula": "Target Search Success Rate = Total Backtracking Duration + Adaptation to Multisensory Events + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events",
+    "dAIC": 9.10033819545032,
+    "dBIC": 4.777640606437274
+   },
+   {
+    "model": 10,
+    "k": 4,
+    "n": 83,
+    "AIC": -61.59283521886064,
+    "BIC": -51.91747278767425,
+    "formula": "Target Search Success Rate = Total Backtracking Duration + Age Group + Total Backtracking Duration \u00d7 Age Group",
+    "dAIC": 5.822363634184853,
+    "dBIC": 1.4996660451718071
+   },
+   {
+    "model": 11,
+    "k": 4,
+    "n": 83,
+    "AIC": -55.24653973436071,
+    "BIC": -45.571177303174316,
+    "formula": "Target Search Success Rate = Adaptation to Multisensory Events + Age Group + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 12.168659118684786,
+    "dBIC": 7.84596152967174
+   },
+   {
+    "model": 12,
+    "k": 5,
+    "n": 83,
+    "AIC": -61.138600642887326,
+    "BIC": -49.044397603904336,
+    "formula": "Target Search Success Rate = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events",
+    "dAIC": 6.27659821015817,
+    "dBIC": 4.37274122894172
+   },
+   {
+    "model": 13,
+    "k": 5,
+    "n": 83,
+    "AIC": -64.9292129151626,
+    "BIC": -52.835009876179605,
+    "formula": "Target Search Success Rate = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Age Group",
+    "dAIC": 2.4859859378829015,
+    "dBIC": 0.5821289566664518
+   },
+   {
+    "model": 14,
+    "k": 5,
+    "n": 83,
+    "AIC": -63.574602370582994,
+    "BIC": -51.480399331600005,
+    "formula": "Target Search Success Rate = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 3.8405964824625016,
+    "dBIC": 1.936739501246052
+   },
+   {
+    "model": 15,
+    "k": 6,
+    "n": 83,
+    "AIC": -63.469069707494015,
+    "BIC": -48.95602606071442,
+    "formula": "Target Search Success Rate = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events + Total Backtracking Duration \u00d7 Age Group",
+    "dAIC": 3.946129145551481,
+    "dBIC": 4.461112772131635
+   },
+   {
+    "model": 16,
+    "k": 6,
+    "n": 83,
+    "AIC": -61.905287485553714,
+    "BIC": -47.39224383877412,
+    "formula": "Target Search Success Rate = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 5.509911367491782,
+    "dBIC": 6.024894994071936
+   },
+   {
+    "model": 17,
+    "k": 6,
+    "n": 83,
+    "AIC": -67.4151988530455,
+    "BIC": -52.9021552062659,
+    "formula": "Target Search Success Rate = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Age Group + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 0.0,
+    "dBIC": 0.514983626580154
+   },
+   {
+    "model": 18,
+    "k": 7,
+    "n": 83,
+    "AIC": -65.4483560498866,
+    "BIC": -48.51647179531041,
+    "formula": "Target Search Success Rate = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events + Total Backtracking Duration \u00d7 Age Group + Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 1.9668428031588974,
+    "dBIC": 4.900667037535648
+   },
+   {
+    "model": 19,
+    "k": 8,
+    "n": 83,
+    "AIC": -64.54496191013507,
+    "BIC": -45.194237047762286,
+    "formula": "Target Search Success Rate = Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events + Total Backtracking Duration \u00d7 Age Group + Adaptation to Multisensory Events \u00d7 Age Group + Total Backtracking Duration \u00d7 Adaptation to Multisensory Events \u00d7 Age Group",
+    "dAIC": 2.8702369429104237,
+    "dBIC": 8.22290178508377
+   }
+  ],
+  "selection": {
+   "AIC_pick": 17,
+   "BIC_pick": 8,
+   "dAIC": 4.322697589013046,
+   "dBIC": 0.514983626580154,
+   "chosen": 17,
+   "how": "AIC pick better by 4.32 on AIC and within 2 on BIC (0.51)",
+   "formula": "Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration \u00d7 Age Group + Adaptation to Multisensory Events \u00d7 Age Group"
+  },
+  "selected": {
+   "common": {
+    "n": 83,
+    "R2": 0.29491028369662786,
+    "adjR2": 0.24912523718342194,
+    "F": 6.4411921829448335,
+    "F_df": [
+     5.0,
+     77.0
+    ],
+    "F_p": 4.7431940351602494e-05,
+    "coefs": {
+     "group[T.child]": {
+      "b": -0.08392236304031965,
+      "CI": [
+       -0.15661884484861993,
+       -0.011225881232019383
+      ],
+      "t": -2.298746378031181,
+      "df": 77.0,
+      "p": 0.024232542953812716,
+      "n": 83
+     },
+     "BT_c": {
+      "b": -0.0003391036869807697,
+      "CI": [
+       -0.001554715376988745,
+       0.0008765080030272057
+      ],
+      "t": -0.5554748384293625,
+      "df": 77.0,
+      "p": 0.5801802429804674,
+      "n": 83
+     },
+     "BT_c:group[T.child]": {
+      "b": -0.0019924100099117364,
+      "CI": [
+       -0.0036669116103044013,
+       -0.0003179084095190714
+      ],
+      "t": -2.3692991324563293,
+      "df": 77.0,
+      "p": 0.02032780497227821,
+      "n": 83
+     },
+     "adaptation_c": {
+      "b": 0.008668517767910616,
+      "CI": [
+       -0.07601225240539866,
+       0.09334928794121988
+      ],
+      "t": 0.20383877082310306,
+      "df": 77.0,
+      "p": 0.839017263082397,
+      "n": 83
+     },
+     "adaptation_c:group[T.child]": {
+      "b": 0.1253114886084736,
+      "CI": [
+       0.004644702166599568,
+       0.24597827505034764
+      ],
+      "t": 2.0679016969609565,
+      "df": 77.0,
+      "p": 0.042007951671846164,
+      "n": 83
+     }
+    },
+    "slopes": {
+     "children_backtracking": {
+      "b": -0.002331513696892506,
+      "CI": [
+       -0.003483140298197613,
+       -0.0011798870955873988
+      ],
+      "t": -4.031373442525317,
+      "df": 77.0,
+      "p": 0.0001293266389367738
+     },
+     "adults_backtracking": {
+      "b": -0.0003391036869807697,
+      "CI": [
+       -0.001554715376988745,
+       0.0008765080030272057
+      ],
+      "t": -0.5554748384293625,
+      "df": 77.0,
+      "p": 0.5801802429804674
+     },
+     "children_adaptation": {
+      "b": 0.13398000637638421,
+      "CI": [
+       0.04801698808907641,
+       0.21994302466369203
+      ],
+      "t": 3.1035238393187994,
+      "df": 77.0,
+      "p": 0.0026744615934321744
+     },
+     "adults_adaptation": {
+      "b": 0.008668517767910616,
+      "CI": [
+       -0.07601225240539866,
+       0.09334928794121988
+      ],
+      "t": 0.20383877082310303,
+      "df": 77.0,
+      "p": 0.839017263082397
+     }
+    }
+   },
+   "all_data": {
+    "n": 83,
+    "R2": 0.29491028369662786,
+    "adjR2": 0.24912523718342194,
+    "F": 6.4411921829448335,
+    "F_df": [
+     5.0,
+     77.0
+    ],
+    "F_p": 4.7431940351602494e-05,
+    "coefs": {
+     "group[T.child]": {
+      "b": -0.08392236304031965,
+      "CI": [
+       -0.15661884484861993,
+       -0.011225881232019383
+      ],
+      "t": -2.298746378031181,
+      "df": 77.0,
+      "p": 0.024232542953812716,
+      "n": 83
+     },
+     "BT_c": {
+      "b": -0.0003391036869807697,
+      "CI": [
+       -0.001554715376988745,
+       0.0008765080030272057
+      ],
+      "t": -0.5554748384293625,
+      "df": 77.0,
+      "p": 0.5801802429804674,
+      "n": 83
+     },
+     "BT_c:group[T.child]": {
+      "b": -0.0019924100099117364,
+      "CI": [
+       -0.0036669116103044013,
+       -0.0003179084095190714
+      ],
+      "t": -2.3692991324563293,
+      "df": 77.0,
+      "p": 0.02032780497227821,
+      "n": 83
+     },
+     "adaptation_c": {
+      "b": 0.008668517767910616,
+      "CI": [
+       -0.07601225240539866,
+       0.09334928794121988
+      ],
+      "t": 0.20383877082310306,
+      "df": 77.0,
+      "p": 0.839017263082397,
+      "n": 83
+     },
+     "adaptation_c:group[T.child]": {
+      "b": 0.1253114886084736,
+      "CI": [
+       0.004644702166599568,
+       0.24597827505034764
+      ],
+      "t": 2.0679016969609565,
+      "df": 77.0,
+      "p": 0.042007951671846164,
+      "n": 83
+     }
+    },
+    "slopes": {
+     "children_backtracking": {
+      "b": -0.002331513696892506,
+      "CI": [
+       -0.003483140298197613,
+       -0.0011798870955873988
+      ],
+      "t": -4.031373442525317,
+      "df": 77.0,
+      "p": 0.0001293266389367738
+     },
+     "adults_backtracking": {
+      "b": -0.0003391036869807697,
+      "CI": [
+       -0.001554715376988745,
+       0.0008765080030272057
+      ],
+      "t": -0.5554748384293625,
+      "df": 77.0,
+      "p": 0.5801802429804674
+     },
+     "children_adaptation": {
+      "b": 0.13398000637638421,
+      "CI": [
+       0.04801698808907641,
+       0.21994302466369203
+      ],
+      "t": 3.1035238393187994,
+      "df": 77.0,
+      "p": 0.0026744615934321744
+     },
+     "adults_adaptation": {
+      "b": 0.008668517767910616,
+      "CI": [
+       -0.07601225240539866,
+       0.09334928794121988
+      ],
+      "t": 0.20383877082310303,
+      "df": 77.0,
+      "p": 0.839017263082397
+     }
+    }
+   }
+  },
+  "single": {
+   "backtracking": {
+    "common": {
+     "interaction": {
+      "b": -0.001691422919532423,
+      "CI": [
+       -0.003399710177988306,
+       1.686433892346016e-05
+      ],
+      "t": -1.9708003374135532,
+      "df": 79.0,
+      "p": 0.05224933531633816,
+      "n": 83
+     },
+     "children": {
+      "b": -0.0019987537735663063,
+      "CI": [
+       -0.0031836245486160397,
+       -0.000813882998516573
+      ],
+      "t": -3.3576825018281773,
+      "df": 79.0,
+      "p": 0.0012113120763569765
+     },
+     "adults": {
+      "b": -0.00030733085403388314,
+      "CI": [
+       -0.001537910637646371,
+       0.0009232489295786048
+      ],
+      "t": -0.49710451211230533,
+      "df": 79.0,
+      "p": 0.6204960193929471
+     },
+     "n": 83
+    },
+    "all_data": {
+     "interaction": {
+      "b": -0.001691422919532423,
+      "CI": [
+       -0.003399710177988306,
+       1.686433892346016e-05
+      ],
+      "t": -1.9708003374135532,
+      "df": 79.0,
+      "p": 0.05224933531633816,
+      "n": 83
+     },
+     "children": {
+      "b": -0.0019987537735663063,
+      "CI": [
+       -0.0031836245486160397,
+       -0.000813882998516573
+      ],
+      "t": -3.3576825018281773,
+      "df": 79.0,
+      "p": 0.0012113120763569765
+     },
+     "adults": {
+      "b": -0.00030733085403388314,
+      "CI": [
+       -0.001537910637646371,
+       0.0009232489295786048
+      ],
+      "t": -0.49710451211230533,
+      "df": 79.0,
+      "p": 0.6204960193929471
+     },
+     "n": 83
+    }
+   },
+   "adaptation": {
+    "common": {
+     "interaction": {
+      "b": 0.09907816641391688,
+      "CI": [
+       -0.02889228857736105,
+       0.22704862140519483
+      ],
+      "t": 1.5410600607568588,
+      "df": 79.0,
+      "p": 0.1272984379101606,
+      "n": 83
+     },
+     "children": {
+      "b": 0.10171521003941698,
+      "CI": [
+       0.00982392272871882,
+       0.19360649735011515
+      ],
+      "t": 2.203245455660286,
+      "df": 79.0,
+      "p": 0.030490566779141935
+     },
+     "adults": {
+      "b": 0.0026370436255001017,
+      "CI": [
+       -0.08642713922629176,
+       0.09170122647729197
+      ],
+      "t": 0.058933949316778346,
+      "df": 79.0,
+      "p": 0.9531535403578728
+     },
+     "n": 83
+    },
+    "all_data": {
+     "interaction": {
+      "b": 0.09907816641391688,
+      "CI": [
+       -0.02889228857736105,
+       0.22704862140519483
+      ],
+      "t": 1.5410600607568588,
+      "df": 79.0,
+      "p": 0.1272984379101606,
+      "n": 83
+     },
+     "children": {
+      "b": 0.10171521003941698,
+      "CI": [
+       0.00982392272871882,
+       0.19360649735011515
+      ],
+      "t": 2.203245455660286,
+      "df": 79.0,
+      "p": 0.030490566779141935
+     },
+     "adults": {
+      "b": 0.0026370436255001017,
+      "CI": [
+       -0.08642713922629176,
+       0.09170122647729197
+      ],
+      "t": 0.058933949316778346,
+      "df": 79.0,
+      "p": 0.9531535403578728
+     },
+     "n": 83
+    }
+   }
+  }
+ }
+}

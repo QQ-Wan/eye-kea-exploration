@@ -1,4 +1,4 @@
-"""Supplement: repeated encounters with multisensory (MS) objects and backtracking.
+"""Additional analysis, not reported in the paper: repeated encounters with multisensory (MS) objects and backtracking.
 (1) participant level: Spearman correlations of backtracking with encounter counts;
 (2) event level: share of MS events on the return leg of a backtracking episode, by encounter;
 (3) whether a backtracking turn follows MS events more often than control events (within 10 s).

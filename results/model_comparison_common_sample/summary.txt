@@ -1,0 +1,44 @@
+REGRESSIONS ON BACKTRACKING AND ADAPTATION (one common sample per outcome; selection by AIC and BIC)
+
+==================== SPATIAL COVERAGE ====================
+common sample: n = 81; excluded by the outlier rule in the full model: C17 (child), C31 (child)
+AIC picks model 19, BIC picks model 10: BIC pick better by 8.94 on BIC and within 2 on AIC (0.64)
+selected model 10: Total Backtracking Duration + Age Group + Total Backtracking Duration × Age Group
+   R² = .269 (26.9% of the variance), adjusted R² = .241, F(3, 77) = 9.46, p < .001
+   age group (children vs adults)           β = −0.036, 95% CI [−0.086, 0.014], t(77) = −1.44, p = .154
+   backtracking                             β = −0.00003, 95% CI [−0.00083, 0.00077], t(77) = −0.08, p = .933
+   backtracking × age group                 β = −0.0018, 95% CI [−0.0030, −0.0007], t(77) = −3.19, p = .002
+   simple slope, children backtracking          β = −0.0019, 95% CI [−0.0027, −0.0010], t(77) = −4.51, p < .001
+   simple slope, adults backtracking            β = −0.00003, 95% CI [−0.00083, 0.00077], t(77) = −0.08, p = .933
+   all participants: R² = .204 (20.4% of the variance), adjusted R² = .174, F(3, 79) = 6.75, p < .001
+single predictor, backtracking × age group: interaction β = −0.0018, 95% CI [−0.0030, −0.0007], t(77) = −3.19, p = .002; children β = −0.0019, 95% CI [−0.0027, −0.0010], t(77) = −4.51, p < .001; adults β = −0.00003, 95% CI [−0.00083, 0.00077], t(77) = −0.08, p = .933
+single predictor, adaptation × age group: interaction β = −0.011, 95% CI [−0.104, 0.083], t(77) = −0.23, p = .818; children β = 0.017, 95% CI [−0.053, 0.087], t(77) = 0.49, p = .629; adults β = 0.028, 95% CI [−0.034, 0.090], t(77) = 0.89, p = .375
+
+==================== OBJECT COVERAGE ====================
+common sample: n = 81; excluded by the outlier rule in the full model: C05 (child), C25 (child)
+AIC picks model 3, BIC picks model 3: AIC and BIC agree
+selected model 3: Adaptation to Multisensory Events
+   R² = .062 (6.2% of the variance), adjusted R² = .050, F(1, 79) = 5.20, p = .025
+   adaptation                               β = −0.022, 95% CI [−0.042, −0.003], t(79) = −2.28, p = .025
+   simple slope, both groups adaptation         β = −0.022, 95% CI [−0.042, −0.003], t(79) = −2.28, p = .025
+   all participants: R² = .042 (4.2% of the variance), adjusted R² = .030, F(1, 81) = 3.57, p = .062
+single predictor, backtracking × age group: interaction β = 0.00008, 95% CI [−0.00050, 0.00066], t(77) = 0.26, p = .793; children β = −0.00009, 95% CI [−0.00051, 0.00032], t(77) = −0.45, p = .653; adults β = −0.00017, 95% CI [−0.00058, 0.00024], t(77) = −0.83, p = .410
+single predictor, adaptation × age group: interaction β = −0.027, 95% CI [−0.067, 0.012], t(77) = −1.37, p = .176; children β = −0.035, 95% CI [−0.063, −0.006], t(77) = −2.42, p = .018; adults β = −0.007, 95% CI [−0.035, 0.020], t(77) = −0.54, p = .593
+
+==================== TARGET SEARCH SUCCESS RATE ====================
+common sample: n = 83; excluded by the outlier rule in the full model: none
+AIC picks model 17, BIC picks model 8: AIC pick better by 4.32 on AIC and within 2 on BIC (0.51)
+selected model 17: Total Backtracking Duration + Adaptation to Multisensory Events + Age Group + Total Backtracking Duration × Age Group + Adaptation to Multisensory Events × Age Group
+   R² = .295 (29.5% of the variance), adjusted R² = .249, F(5, 77) = 6.44, p < .001
+   age group (children vs adults)           β = −0.084, 95% CI [−0.157, −0.011], t(77) = −2.30, p = .024
+   backtracking                             β = −0.0003, 95% CI [−0.0016, 0.0009], t(77) = −0.56, p = .580
+   backtracking × age group                 β = −0.0020, 95% CI [−0.0037, −0.0003], t(77) = −2.37, p = .020
+   adaptation                               β = 0.009, 95% CI [−0.076, 0.093], t(77) = 0.20, p = .839
+   adaptation × age group                   β = 0.125, 95% CI [0.005, 0.246], t(77) = 2.07, p = .042
+   simple slope, children backtracking          β = −0.0023, 95% CI [−0.0035, −0.0012], t(77) = −4.03, p < .001
+   simple slope, adults backtracking            β = −0.0003, 95% CI [−0.0016, 0.0009], t(77) = −0.56, p = .580
+   simple slope, children adaptation            β = 0.134, 95% CI [0.048, 0.220], t(77) = 3.10, p = .003
+   simple slope, adults adaptation              β = 0.009, 95% CI [−0.076, 0.093], t(77) = 0.20, p = .839
+   all participants: R² = .295 (29.5% of the variance), adjusted R² = .249, F(5, 77) = 6.44, p < .001
+single predictor, backtracking × age group: interaction β = −0.0017, 95% CI [−0.0034, 0.0000], t(79) = −1.97, p = .052; children β = −0.0020, 95% CI [−0.0032, −0.0008], t(79) = −3.36, p = .001; adults β = −0.0003, 95% CI [−0.0015, 0.0009], t(79) = −0.50, p = .620
+single predictor, adaptation × age group: interaction β = 0.099, 95% CI [−0.029, 0.227], t(79) = 1.54, p = .127; children β = 0.102, 95% CI [0.010, 0.194], t(79) = 2.20, p = .030; adults β = 0.003, 95% CI [−0.086, 0.092], t(79) = 0.06, p = .953

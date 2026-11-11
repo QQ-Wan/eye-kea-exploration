@@ -1,8 +1,10 @@
 """Data loading and statistical helpers shared by the Python analysis scripts.
 
 Conventions: group differences are adults minus children; Cohen's d uses the pooled SD;
-regressions are OLS with adults as the reference group; the outlier rule is applied
-separately to each regression model, and results without exclusions are kept alongside.
+regressions are OLS with adults as the reference group. Outlier rule: Cook's D > 4/n AND
+|externally studentized residual| > 2.5. For the models relating backtracking and adaptation to an outcome,
+it is applied once per outcome, in the full model (common_sample); age regressions apply it to each model
+(fit_rule, reg_rule). Results without exclusions are kept alongside.
 """
 import numpy as np, pandas as pd, scipy.stats as st, statsmodels.formula.api as smf
 from statsmodels.stats.outliers_influence import OLSInfluence
@@ -72,22 +74,40 @@ def partial_r(x, a="BT", b="adaptation", covs="age + n_ms_events"):
     r, p = st.pearsonr(ra, rb); k = len(covs.split("+")); z = np.arctanh(r); se = 1 / np.sqrt(len(x) - 3 - k)
     return dict(r=r, df=len(x) - 2 - k, p=p, CI=[np.tanh(z - 1.96 * se), np.tanh(z + 1.96 * se)], n=len(x))
 
-# joint models compared for each outcome (numbered 2-19 as in Tables S1-S3); predictors centered
+# models compared for each outcome (Tables S2-S4): model 1 = intercept only; models 2-19 = the 18 combinations of backtracking,
+# adaptation, age group and their interactions; predictors centered at the mean of the common sample
 TERMS = {"B": "BT_c", "A": "adaptation_c", "G": "group"}
 MODELS = [["B"], ["A"], ["G"], ["B", "A"], ["B", "G"], ["A", "G"], ["B", "A", "G"], ["B", "A", "B:A"], ["B", "G", "B:G"], ["A", "G", "A:G"],
           ["B", "A", "G", "B:A"], ["B", "A", "G", "B:G"], ["B", "A", "G", "A:G"], ["B", "A", "G", "B:A", "B:G"], ["B", "A", "G", "B:A", "A:G"],
           ["B", "A", "G", "B:G", "A:G"], ["B", "A", "G", "B:A", "B:G", "A:G"], ["B", "A", "G", "B:A", "B:G", "A:G", "B:A:G"]]
+SPECS = [[]] + MODELS                                   # index i - 1 = model i
 def rhs(spec): return " + ".join(":".join(TERMS[t] for t in s.split(":")) for s in spec)
+def model_formula(y, i): return f"{y} ~ {rhs(SPECS[i - 1])}" if i > 1 else f"{y} ~ 1"
 
-def select_model(D, y, extra=""):
-    """Fit models 2-19 on participants with all predictors; choose by the majority of AIC, BIC and adjusted R2
-    (AIC if all three disagree). Returns the comparison table, the three picks and the chosen model number."""
-    X = D.dropna(subset=[y, "BT", "adaptation"]).reset_index(drop=True)
-    T = pd.DataFrame([dict(model=i, k=int(m.df_model) + 1, AIC=m.aic, BIC=m.bic, adjR2=m.rsquared_adj, formula=rhs(spec) + extra)
-                      for i, spec in enumerate(MODELS, start=2) for m in [smf.ols(f"{y} ~ {rhs(spec)}{extra}", X).fit()]])
-    picks = {"AIC": int(T.loc[T.AIC.idxmin(), "model"]), "BIC": int(T.loc[T.BIC.idxmin(), "model"]), "adjR2": int(T.loc[T.adjR2.idxmax(), "model"])}
-    vc = pd.Series(picks).value_counts()
-    return T, picks, int(vc.index[0]) if vc.iloc[0] >= 2 else picks["AIC"]
+def center(X):
+    X = X.copy()
+    for v in ["BT", "adaptation"]: X[v + "_c"] = X[v] - X[v].mean()
+    return X
+
+def common_sample(D, y):
+    """One sample per outcome: fit the full model (model 19) to all participants with the outcome and both predictors, exclude the
+    participants the outlier rule flags, and center backtracking and adaptation at the mean of the remaining sample.
+    Returns (common sample, all participants, excluded codes); the all-participant table is centered at its own mean."""
+    X_all = center(D.dropna(subset=[y, "BT", "adaptation"]).reset_index(drop=True))
+    inf = OLSInfluence(smf.ols(model_formula(y, 19), X_all).fit())
+    flag = (inf.cooks_distance[0] > 4 / len(X_all)) & (np.abs(inf.resid_studentized_external) > 2.5)
+    return center(X_all[~flag].reset_index(drop=True)), X_all, sorted(X_all.code[flag])
+
+def select_aic_bic(T):
+    """The model favored by both AIC and BIC; when they disagree, the model better by more than 2 on one criterion and within 2 on
+    the other (otherwise undetermined, chosen = None). T has columns model, AIC, BIC."""
+    T = T.set_index("model"); a, b = int(T.AIC.idxmin()), int(T.BIC.idxmin())
+    if a == b: return dict(AIC_pick=a, BIC_pick=b, chosen=a, how="AIC and BIC agree")
+    dA, dB = T.AIC[b] - T.AIC[a], T.BIC[a] - T.BIC[b]   # how much better each pick is on its own criterion
+    r = dict(AIC_pick=a, BIC_pick=b, dAIC=dA, dBIC=dB)
+    if dA > 2 and dB <= 2: return dict(r, chosen=a, how=f"AIC pick better by {dA:.2f} on AIC and within 2 on BIC ({dB:.2f})")
+    if dB > 2 and dA <= 2: return dict(r, chosen=b, how=f"BIC pick better by {dB:.2f} on BIC and within 2 on AIC ({dA:.2f})")
+    return dict(r, chosen=None, how=f"undetermined: AIC difference {dA:.2f}, BIC difference {dB:.2f}")
 
 def fmt(r):
     return f"b={r['b']:+.4f} [{r['CI'][0]:+.4f}, {r['CI'][1]:+.4f}], t({r['df']:.0f})={r['t']:+.2f}, p={r['p']:.4f}"

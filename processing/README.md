@@ -7,10 +7,12 @@ These steps need the raw recordings, which are not shared. They are included so 
 Copy `paths.example.json` to `paths.json` and set three folders:
 
 - `raw_root`: the project folder with the recordings (`Adults/`, `Children/`, `VR_data/`, search files);
-- `private_dir`: for identified intermediate files and the ID key. It must be outside the repository;
+- `private_dir`: for identified intermediate files, the ID key and `processing_settings.json`. It must be outside the repository;
 - `staging_dir`: for symbolic links with standard file names. Keep it outside cloud-synced folders; some sync services duplicate links.
 
-`paths.json` is not committed.
+`paths.json` is not committed. `processing_settings.json`, in `private_dir`, holds the settings that identify individual sessions: the
+raw session codes, which sessions were excluded and why, recordings saved under non-standard file names, and the locations of the
+identified participant records. It is not shared; `config.py` states the rules it implements.
 
 ## Steps
 
@@ -28,7 +30,7 @@ Steps 2 and 3 each read several hundred files. Run them one at a time: reading t
 
 | File | Content |
 |---|---|
-| `config.py` | Inclusion rule, excluded sessions with reasons, recordings saved under non-standard names, and measure settings |
+| `config.py` | Inclusion and exclusion rules, file sources and measure settings. Session-level details are read from the private `processing_settings.json` |
 | `lib/spatial_detector.py` | Backtracking detector |
 | `lib/process_ms_events_simple.py` | Pre/post windows around multisensory events |
 | `lib/process_control_events_simple.py` | Pre/post windows around control events |
@@ -36,4 +38,4 @@ Steps 2 and 3 each read several hundred files. Run them one at a time: reading t
 
 ## Recording choice
 
-For each participant and block, the recording listed in `config.FILE_OVERRIDES` is used if there is one. Those are recordings saved under a non-standard name, each verified by recording time and duration. Otherwise the step uses the recording in the participant's data folder; if a block was restarted, the longest recording is used.
+For each participant and block, the recording listed in `config.FILE_OVERRIDES` (read from the private settings) is used if there is one. Those are recordings saved under a non-standard name, each verified by recording time and duration. Otherwise the step uses the recording in the participant's data folder; if a block was restarted, the longest recording is used.
