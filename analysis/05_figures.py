@@ -23,9 +23,9 @@ from matplotlib.gridspec import GridSpec
 from matplotlib.lines import Line2D
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from plot_style import (PALETTE, align_panel_labels, add_title, apply_xinger, place_legend, place_stats,  # noqa: E402
+from plot_style import (PALETTE, _sizes, align_panel_labels, add_title, apply_xinger, place_legend, place_stats,  # noqa: E402
                         save_xinger, scale_for_panel, xinger_axes)
-from common import common_sample  # noqa: E402
+from common import common_sample, model_formula  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "figures"
@@ -118,10 +118,19 @@ def age_scatter(ax, v, ylim):
     ax.set_xticks(range(7, 16)); ax.set_xlim(6.6, 15.4); ax.set_ylim(*ylim)
     ax.set_xlabel("Age (years)")
     xinger_axes(ax, SCALE)
-    place_stats(ax, beta_text(r), SCALE)
-    place_legend(ax, SCALE, italic=False, handles=[
+    txt = place_stats(ax, beta_text(r), SCALE)
+    leg = place_legend(ax, SCALE, italic=False, handles=[
         Line2D([], [], marker="o", ls="none", color=COLD["child"], markersize=7 * SCALE),
         Line2D([], [], color=COL["adult"], ls="--")], labels=["Children", "Adult mean"])
+    if leg._loc == 1: align_legend_to_text(ax, leg, txt)
+
+def align_legend_to_text(ax, leg, txt):
+    """Upper-right legend: move it so its first row sits on the same line as the last line of the stats text (the p value),
+    which is short enough to leave room beside it."""
+    fig = ax.figure; fig.canvas.draw()
+    dy = txt.get_window_extent().y0 - leg.get_texts()[0].get_window_extent().y0      # same font, so equal bottoms = same baseline
+    x, y = leg.get_bbox_to_anchor().transformed(ax.transAxes.inverted()).get_points()[1]
+    leg.set_bbox_to_anchor((x, y + dy / ax.get_window_extent().height), transform=ax.transAxes)
 
 def top(v, step):   # axis top with room above the data for the in-panel text
     return np.ceil(D[v].max() * 1.30 / step) * step
@@ -179,8 +188,20 @@ for g in GROUPS:
     x = D[D.group == g]
     ols_band(a3, x.BT, x.success_proportion, COL[g], xl, COLL[g])
     a3.scatter(x.BT, x.success_proportion, s=PT, color=COLD[g], alpha=0.85, lw=0, zorder=3, label=NAME[g])
-a3.set_xlim(*xl); a3.set_ylim(0, 1.6); a3.set_xlabel("Backtracking duration (s)")   # headroom for the legend
-xinger_axes(a3, SCALE); place_legend(a3, SCALE, italic=False)
+a3.set_xlim(*xl); a3.set_ylim(*lim); a3.set_xlabel("Backtracking duration (s)")   # same y scale as the other two panels
+xinger_axes(a3, SCALE)
+# stats: the backtracking x age group interaction in the selected search-success model (model 17, Table S4), as in the text
+Xq, _, _ = common_sample(D.assign(group=pd.Categorical(D.group, ["adult", "child"])), "success_proportion")
+mq = smf.ols(model_formula("success_proportion", 17), Xq).fit(); kq = "BT_c:group[T.child]"
+place_stats(a3, beta_text(dict(b=mq.params[kq], CI=list(mq.conf_int().loc[kq]), t=mq.tvalues[kq], df=mq.df_resid, p=mq.pvalues[kq])), SCALE)
+# legend: on the shared y scale no anchor passes place_legend's check (it counts the confidence bands as occupied); the lower-left
+# corner (short backtracking, low success) is empty, so the legend goes there, at the height of the middle panel's legend
+lg2 = a2.get_legend(); assert lg2._loc == 4, lg2._loc                          # lower right; lowered to the panel bottom so both legends clear the points
+lg2.set_bbox_to_anchor((0.97, 0.0), transform=a2.transAxes); lg2.borderaxespad = 0
+fig.canvas.draw()
+y0 = a2.transAxes.inverted().transform(a2.get_legend().get_window_extent().get_points())[0, 1]   # bottom, in axes fraction
+a3.legend(loc="lower left", bbox_to_anchor=(0.03, y0), bbox_transform=a3.transAxes, borderaxespad=0, frameon=False, title=None,
+          fontsize=_sizes(SCALE)["legend_cap"], handletextpad=0.5, labelspacing=0.4)
 for ax in (a1, a2, a3): ax.set_yticks(np.round(np.arange(0, 1.01, 0.2), 1))
 save(fig, "fig6_search")
 
@@ -188,7 +209,7 @@ save(fig, "fig6_search")
 # Each panel: one outcome against one predictor, with each age group's OLS line and 95% CI from the single-predictor model
 # (outcome ~ predictor x age group) on the outcome's common sample: the participants flagged by the outlier rule in the full
 # model (common.common_sample, as in 06_model_comparison_common_sample.py) are left out of the fit and drawn as open circles.
-ROWS = [("spatial_coverage", "Spatial coverage"), ("opt1", "Object coverage"), ("success_proportion", "Proportion of targets found")]
+ROWS = [("spatial_coverage", "Spatial coverage"), ("opt1", "Object coverage"), ("success_proportion", "Search success")]   # the caption's term; fits the panel on one line
 COLS = [("BT", "Backtracking duration (s)"), ("adaptation", "Adaptation slope (s per encounter)")]
 fig, axes = plt.subplots(3, 2, figsize=(10.5, 3 * PANEL_H + 2.2), gridspec_kw={"wspace": 0.18, "hspace": 0.40}, sharex="col", sharey="row")
 for i, (y, ylab) in enumerate(ROWS):
@@ -209,8 +230,8 @@ for i, (y, ylab) in enumerate(ROWS):
         ax.set_xlim(*xl)
         if j == 0: ax.set_ylabel(ylab)
         if i == 2: ax.set_xlabel(xlab)
-for i, (y, _) in enumerate(ROWS):
-    lo, hi = D[y].min(), D[y].max(); axes[i, 0].set_ylim(lo - 0.05 * (hi - lo), hi + 0.45 * (hi - lo))
+for i, (y, _) in enumerate(ROWS):   # headroom above the data only in the top row, which holds the legend
+    lo, hi = D[y].min(), D[y].max(); axes[i, 0].set_ylim(lo - 0.05 * (hi - lo), hi + (0.45 if i == 0 else 0.08) * (hi - lo))
 for ax in axes.flat: xinger_axes(ax, SCALE)
 for ax in axes[2]: ax.set_yticks([t for t in ax.get_yticks() if t <= 1.0 + 1e-9])   # proportions stop at 1
 place_legend(axes[0, 0], SCALE, italic=False)
